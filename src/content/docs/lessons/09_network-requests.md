@@ -8,3 +8,6 @@ curl
 rsync
 scp
 
+dig
+nslookup
+

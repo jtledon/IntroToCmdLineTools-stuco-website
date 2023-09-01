@@ -15,10 +15,12 @@ export default defineConfig({
 					autogenerate: { directory: 'lessons' },
 				},
 				{
-					label: 'Tips',
+					label: 'General',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'Frequently Asked Questions', link: '/tips/faq/' },
+						{ label: 'Frequently Asked Questions', link: '/general/faq/' },
+						{ label: 'About This Class', link: '/general/about-this-class/' },
+						{ label: 'About Me', link: '/general/about-me/' },
 					],
 				},
 			],

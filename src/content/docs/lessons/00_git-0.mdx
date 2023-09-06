@@ -1,0 +1,114 @@
+---
+title: git:Basics
+description: An intro into the fundamentals in git
+---
+
+import { Image } from 'astro:assets';
+import lga from '../../../assets/git-lga-example.png'
+
+## `git` under the hood
+
+### Commits
+
+Commits are static and refer to the hash of the changed code, as well as the hash of the parent commit
+
+### Branches
+
+Branches are just tags that refer to a specific commit. If you make a new commit while attatched to a specific branch, it will update the ref of the branch
+
+### Tags
+
+Tags are similar to branches, but they stay statically linked to commit even after a new commit
+
+## Viewing status
+
+### `git status`
+
+Shows the state of the git repo.
+
+### `git remote -v`
+
+Shows the remote repository link that you are both fetching from and pushing to
+
+### `git show {hash}`
+
+Allows you to inspect any individual commit
+
+### `git log`
+
+Shows you a history of your commits, and a summary of information, including the hash, and commit message
+
+## `git` shortcuts
+
+### `g`
+
+This is a shell based alias/expansion that allows the letter `g` to expand into `git`. This is a super useful timesave when youre typing the word `git` hundreds of times a day
+
+You need to download `git-completion.bash` and set it up using the following
+```bash
+# https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
+test -f ${PATH_TO}/.git-completion.bash && . $_
+__git_complete g __git_main
+```
+
+### `git lg[a]`
+
+This is one of my most used aliases, especially for monitoring the state of branches.
+
+It prints out a commandline version of your git graph, so you can keep track of where all you branches, commits, and tags are. It expands out to
+`lga = log --color --graph --format="'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'" --abbrev-commit --date-order --exclude=refs/stash --all`
+
+<Image
+    src={lga}
+    alt="Impage of output of git lga in my dotfiles repo"
+    width="1000"
+    height="300"
+/>
+An example of what the output looks like when I run it on my actual dotfiles repo
+
+### Full list of my personal aliases
+
+```bash
+[alias]
+    all-commands = help --all
+    s = status --short --branch
+    st = status
+    a = add
+    addc = "! addc() { git ls-files --modified --deleted --others | awk '$0 ~ /.*(c|h|cpp)$/ {print}' | xargs -r git add ; } ; addc"
+    ac = !git add --all && git commit -m
+    c = commit -m
+    empty-commit = commit --allow-empty -m
+    ecm = empty-commit
+    cp = "! cp() { git commit -m \"$1\" && git push ; } ; cp"
+    p = push
+    acp = "! acp() { git add -A && git commit -m \"$1\" && git push ; } ; acp"
+    co = checkout
+    b = branch
+    ba = branch --all
+    d = "! dif() { git diff $* -- ':(exclude)package-lock.json' ':!dist' ; } ; dif"
+    wt = worktree
+    wt-ar = "! wtaddremote() { git worktree add --track -b $1 './$1' origin/$1 ; } ; wtaddremote" # where $1 represents the branch name you want. Also, this branch will be made in the current directory, so you should run this while in OtherBranches/
+    sl = stash list
+    lg = log --color --graph --format="'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'" --abbrev-commit --date-order
+    lga = lg --exclude=refs/stash --all
+    watch = "! wtch() { watch -c -n 0.5 git lga ; } ; wtch"
+    last = log -n 1 HEAD --stat
+    lastcommit = log -n 1
+    dt = difftool
+    rv = remote --verbose
+    uncommit = reset HEAD^
+    recommit = commit --amend --no-edit
+    editcommit = commit --amend
+    aliases = config --get-regexp '^alias\\.'
+    tracking = ls-tree --full-tree --name-only -r HEAD
+    showrefs = remote show origin
+    canff = "!f() { if [ $# -gt 0 ]; then b=\"$1\"; git rev-parse -q --verify \"$b^{commit}\" >/dev/null || { printf \"%s: not a valid commit specifier\n\" \"$b\"; return 1; } else b=$(git rev-parse --symbolic-full-name --abbrev-ref @{u}) || return $?; fi; if git merge-base --is-ancestor HEAD \"$b\"; then echo \"merge with $b can fast-forward\"; else echo \"merge with $b cannot fast-forward\"; fi; }; f" # can fast-forward
+    search = "!git rev-list --all | xargs git grep -F"
+    lcdiff = diff --stat
+    filediff = diff --name-only
+    applyIgnore = rm -r --cached .
+    ignored = "!git check-ignore -v $(find . -type f -print)" # list ignored files
+    tracked = ls-tree -r master --name-only # list tracked files
+    settings = config --global --list --show-origin # can also use --local and --system
+    conflicts = diff --name-only --diff-filter=U --relative # list files with (unresolved?) conflicts
+```

@@ -10,4 +10,4 @@ scp
 
 dig
 nslookup
-
+nc

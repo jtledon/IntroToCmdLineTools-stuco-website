@@ -2,4 +2,8 @@
 title: Docker
 ---
 
-This will probably end up getting cut due to time, and because Im not good enough with Docker to talk about it
+unsure if we will have time for this during the semster
+
+docker-compose.yml
+
+setting up a base docker container with personal defaults

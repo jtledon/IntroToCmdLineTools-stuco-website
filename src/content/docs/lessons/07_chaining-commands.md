@@ -13,3 +13,7 @@ Piping |
 xargs
 
 signals
+
+error / return codes
+
+redirection (`>` | `>>` | `2>&1 /dev/null`)

@@ -3,7 +3,7 @@ title: Intro to [neo]vim
 ---
 
 benefits
-* on basically every server/computer 
+* on basically every server/computer
 * useful on ssh sessions bc its in the commandline
 * customize it to fit you exactly
 * encourages you to learn about how exactly your editor works
@@ -19,4 +19,12 @@ web
 gg
 G
 ^$
+fFtT
+/?nN
 
+TODO: this is how I should introduce vim
+[count] + verb + noun
+2 delete word
+delete inner/inside word
+change inside "
+https://www.youtube.com/watch?v=wlR5gYd6um0

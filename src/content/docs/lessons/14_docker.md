@@ -2,7 +2,7 @@
 title: Docker
 ---
 
-unsure if we will have time for this during the semster
+unsure if we will have time for this during the semester
 
 docker-compose.yml
 

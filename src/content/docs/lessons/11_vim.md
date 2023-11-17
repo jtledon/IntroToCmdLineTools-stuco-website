@@ -4,7 +4,7 @@ title: Intro to [neo]vim
 
 benefits
 * on basically every server/computer
-* useful on ssh sessions bc its in the commandline
+* useful on ssh sessions bc its in the command-line
 * customize it to fit you exactly
 * encourages you to learn about how exactly your editor works
 

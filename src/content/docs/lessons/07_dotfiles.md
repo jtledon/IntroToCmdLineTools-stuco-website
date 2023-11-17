@@ -1,5 +1,5 @@
 ---
-title: Managing .dotfiles
+title: Managing .dotfiles and your dev environment
 description: How to configure your development environment with files, so that your settings always persist
 ---
 
@@ -13,3 +13,10 @@ description: How to configure your development environment with files, so that y
 .config/
 
 $XDG_CONFIG_HOME
+
+the general linux file system (/bin, /usr, /mnt, /dev, ...)
+
+Environment variables
+
+$PATH
+

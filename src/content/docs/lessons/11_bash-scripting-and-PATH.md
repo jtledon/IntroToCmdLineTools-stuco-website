@@ -2,6 +2,8 @@
 title: Writing bash code and terminal tricks
 ---
 
+<!-- TODO: Maybe consider merging this with the dotfiles lesson -->
+
 file globbing
 `*.{c,h}`
 

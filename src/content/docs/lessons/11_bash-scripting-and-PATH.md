@@ -7,10 +7,12 @@ title: Writing bash code and terminal tricks
 file globbing
 `*.{c,h}`
 
-./ vs source vs adding to PATH
+`./` vs `source` vs adding to PATH
 
-Bash scripting, ${} variable substitution vs $() vs ``
+`()` vs `(())` vs `[[]]` vs `[]` vs test in `if` conditions
 
-!! And !$ and !^ and all variations for referencing the previous command
+Bash scripting, `${}` variable substitution vs `$()` vs ``
 
-pushd / popd for scripting purposes of changing directories
+`!!` And `!$` and `!^` and all variations for referencing the previous command
+
+`pushd` / `popd` for scripting purposes of changing directories

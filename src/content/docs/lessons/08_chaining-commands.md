@@ -12,8 +12,11 @@ Piping |
 
 xargs
 
+redirection (`>` | `>>` | `2>&1 /dev/null` | `<` | `<<<`)
+
+`$() vs `` `
+
 signals
 
 error / return codes
 
-redirection (`>` | `>>` | `2>&1 /dev/null`)

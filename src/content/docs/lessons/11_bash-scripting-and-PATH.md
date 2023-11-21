@@ -13,6 +13,10 @@ file globbing
 
 Bash scripting, `${}` variable substitution vs `$()` vs ``
 
+interactive vs non-interactive shells: what they are and the impact that it has
+
 `!!` And `!$` and `!^` and all variations for referencing the previous command
 
 `pushd` / `popd` for scripting purposes of changing directories
+
+cron jobs for automating commands to run at a specific time

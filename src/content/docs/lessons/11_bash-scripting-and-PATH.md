@@ -19,4 +19,6 @@ interactive vs non-interactive shells: what they are and the impact that it has
 
 `pushd` / `popd` for scripting purposes of changing directories
 
+`""` vs `''` - `""` allows for bash interpolation such as `"$HOME"`, which will be computed as `/home/jasonledon/`, but `''` treats it as a full string
+
 cron jobs for automating commands to run at a specific time

@@ -1,5 +1,9 @@
 ---
 title: Writing bash code and terminal tricks
+sidebar:
+    order: 11
+    hidden: true
+    # badge: New
 ---
 
 <!-- TODO: Maybe consider merging this with the dotfiles lesson -->

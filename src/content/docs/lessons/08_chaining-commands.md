@@ -1,6 +1,10 @@
 ---
 title: Chaining commands together
 description: A commandline window tiler, tmux
+sidebar:
+    order: 8
+    hidden: true
+    # badge: New
 ---
 
 Unix philosophy

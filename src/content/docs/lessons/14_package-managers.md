@@ -1,5 +1,9 @@
 ---
 title: Package managers
+sidebar:
+    order: 14
+    hidden: true
+    # badge: New
 ---
 
 homebrew

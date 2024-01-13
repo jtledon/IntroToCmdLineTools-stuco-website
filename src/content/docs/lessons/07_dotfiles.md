@@ -1,6 +1,10 @@
 ---
 title: Managing .dotfiles and your dev environment
 description: How to configure your development environment with files, so that your settings always persist
+sidebar:
+    order: 7
+    hidden: true
+    # badge: New
 ---
 
 .bashrc vs .bash_profile and how they differ depending on interactive shell or not

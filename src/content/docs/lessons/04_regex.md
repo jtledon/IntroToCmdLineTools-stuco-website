@@ -1,5 +1,9 @@
 ---
 title: RegEx, Reading Files and Fuzzy Finding
+sidebar:
+    order: 4
+    hidden: true
+    # badge: New
 ---
 
 Impossible to read, but super powerful for text processing and searching

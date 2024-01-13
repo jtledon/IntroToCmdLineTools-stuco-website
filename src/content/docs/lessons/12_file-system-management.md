@@ -1,6 +1,10 @@
 ---
 title: Managing permissions and file system space
 description: How to manage file/directory permissions, the different types,
+sidebar:
+    order: 12
+    hidden: true
+    # badge: New
 ---
 
 tree
@@ -17,9 +21,9 @@ fs setacl
 
 htop
 
-ps
+ps - (can) show all jobs on the system
 
-jobs
+jobs - only shows the processes being managed by this specific shell instance from being sent to the background
 
 kill
 

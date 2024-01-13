@@ -1,6 +1,10 @@
 ---
 title: Intro to tmux
 description: A commandline window tiler, tmux
+sidebar:
+    order: 6
+    hidden: true
+    # badge: New
 ---
 
 ## The benefit that TMUX provides

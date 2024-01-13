@@ -1,5 +1,9 @@
 ---
 title: Intro to [neo]vim
+sidebar:
+    order: 5
+    hidden: true
+    # badge: New
 ---
 
 benefits

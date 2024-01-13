@@ -1,6 +1,15 @@
 ---
 title: Reading documentation
 description: An intro into the fundamentals in git
+sidebar:
+    # label: Custom auto-generated label
+    order: 0
+    # hidden: true
+    badge:
+        text: New
+        variant: default
+    # attrs:
+    #    target: _blank # open in new tab
 ---
 
 man pages

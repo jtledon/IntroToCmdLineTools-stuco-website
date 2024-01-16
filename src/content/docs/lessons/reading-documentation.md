@@ -113,12 +113,12 @@ A lot of flags, especially the most common ones, have two forms, the long form a
 :::tip
 You can usually chain multiple short form flags together:
 ```bash
-$ ls -la
+$ ls -lha
 ```
 
-But if the short form flag requires an argument, it must be on the end:
+But if the short form flag requires an argument, it must be on the end, like `grep`'s `-A` or `-B` flags:
 ```bash
-$ grep -HnA 3 -B 3
+$ grep -rHnA 3 -B 3 word
 ```
 :::
 

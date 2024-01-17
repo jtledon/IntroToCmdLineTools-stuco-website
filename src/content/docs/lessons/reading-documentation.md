@@ -138,6 +138,9 @@ but you _must_ provide some search pattern
     * Ensure that you can clone and push to a repo from your terminal
 2. Install Docker and make sure you can run the class Docker container
     * You don't need to know how docker works right now, we'll hopefully get into that later
-3. Review the absolute basics of git (`clone` `add` `commit` `push`)
+
+:::note
+Submit this homework by dm'ing me on the course slack with your GitHub username
+:::
 
 If you need any help, reach out to me on the class Slack. I can get you setup, and send you some videos for reference

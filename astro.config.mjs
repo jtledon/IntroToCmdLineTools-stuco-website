@@ -18,7 +18,7 @@ export default defineConfig({
 					label: 'General',
 					items: [
 						{ label: 'Frequently Asked Questions', link: '/general/faq/' },
-						{ label: 'About This Class', link: '/general/about-this-class/' },
+						{ label: 'About This Class & Assets', link: '/general/about-this-class/' },
 						// { label: 'About Me', link: '/general/about-me/' },
 					],
 				},

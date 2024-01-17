@@ -127,7 +127,7 @@ If we look at the following specification for the `grep` command:
 grep [OPTION]... PATTERNS [FILE]...
 ```
 We see that you can\
-optionally define various options, or none at all\
+optionally define different options via flags, or none at all\
 optionally define various files to search, or none at all\
 but you _must_ provide some search pattern
 
@@ -141,4 +141,3 @@ but you _must_ provide some search pattern
 3. Review the absolute basics of git (`clone` `add` `commit` `push`)
 
 If you need any help, reach out to me on the class Slack. I can get you setup, and send you some videos for reference
-

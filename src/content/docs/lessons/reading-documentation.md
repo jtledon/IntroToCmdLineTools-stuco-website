@@ -140,7 +140,7 @@ but you _must_ provide some search pattern
     * You don't need to know how docker works right now, we'll hopefully get into that later
 
 :::note
-Submit this homework by dm'ing me on the course slack with your GitHub username
+To submit this homework fill out the [entry assessment](https://bit.ly/jledon-stuco-assessment), with the GitHub username you will be using in the course
 :::
 
 If you need any help, reach out to me on the class Slack. I can get you setup, and send you some videos for reference

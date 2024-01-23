@@ -36,8 +36,8 @@ export default defineConfig({
             ]
         }),
 
-        astroExpressiveCode(),
-        mdx(),
+        // astroExpressiveCode(),
+        // mdx(),
     ],
 
     // Process images with sharp: https://docs.astro.build/en/guides/assets/#using-sharp

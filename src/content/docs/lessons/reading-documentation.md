@@ -5,9 +5,11 @@ sidebar:
     # label: Custom auto-generated label
     order: 0
     hidden: false
-    badge:
-        text: New
-        variant: default
+
+    # badge:
+    #     text: New
+    #     variant: default
+
     # attrs:
     #    target: _blank # open in new tab
 ---

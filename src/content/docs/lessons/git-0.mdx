@@ -3,17 +3,26 @@ title: git:Basics
 description: An intro into the fundamentals in git
 sidebar:
     order: 1
-    hidden: true
+    hidden: false
+    badge: New
 ---
+import { Image } from 'astro:assets';
+import lga from '../../../assets/lga-branching.png';
 
 
 ## `git` Basics
+
+### clone
+
+### init
 
 ### add, commit, push, rebase -i
 
 Staging area. If you add a file to the staging area - `git add` - that is the version that will be committed during the next commit. Any modifications to the file after the last add will not be recorded in the next commit
 
-### clone
+
+### fetch
+and how its different than pull
 
 ### resolving a merge conflict
 
@@ -69,6 +78,12 @@ This is one of my most used aliases, especially for monitoring the state of bran
 It prints out a commandline version of your git graph, so you can keep track of where all you branches, commits, and tags are. It expands out to
 `lga = log --color --graph --format="'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'" --abbrev-commit --date-order --exclude=refs/stash --all`
 
+<Image
+    src={ lga }
+    alt="Image of output of git lga in my dotfiles repo"
+    width="1000"
+    height="300"
+/>
 An example of what the output looks like when I run it on my actual dotfiles repo
 
 ### Full list of my personal aliases

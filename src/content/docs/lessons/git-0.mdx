@@ -4,11 +4,8 @@ description: An intro into the fundamentals in git
 sidebar:
     order: 1
     hidden: true
-    # badge: New
 ---
 
-import { Image } from 'astro:assets';
-import lga from '../../../assets/git-lga-example.png'
 
 ## `git` Basics
 
@@ -72,12 +69,6 @@ This is one of my most used aliases, especially for monitoring the state of bran
 It prints out a commandline version of your git graph, so you can keep track of where all you branches, commits, and tags are. It expands out to
 `lga = log --color --graph --format="'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'" --abbrev-commit --date-order --exclude=refs/stash --all`
 
-<Image
-    src={lga}
-    alt="Image of output of git lga in my dotfiles repo"
-    width="1000"
-    height="300"
-/>
 An example of what the output looks like when I run it on my actual dotfiles repo
 
 ### Full list of my personal aliases

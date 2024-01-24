@@ -8,6 +8,10 @@ sidebar:
 
 Impossible to read, but super powerful for text processing and searching
 
+There are different engines for regex, each with their own syntax and abilities
+
+[[:digit:]] vs \d
+
 cat
 head
 tail [-F]

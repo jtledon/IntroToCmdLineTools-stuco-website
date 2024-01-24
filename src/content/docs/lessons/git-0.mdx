@@ -3,28 +3,158 @@ title: git:Basics
 description: An intro into the fundamentals in git
 sidebar:
     order: 1
-    hidden: false
+    hidden: true
     badge: New
 ---
 import { Image } from 'astro:assets';
 import lga from '../../../assets/lga-branching.png';
 
 
-## `git` Basics
+## Getting started
 
-### clone
+### `git clone`
 
-### init
+The most common way to get started working in a git repository is to clone it from a hosting provider like GitHub or GitLab.
 
-### add, commit, push, rebase -i
+```bash
+$ git clone git@github.com:jtledon/stuco-intro-to-git.git [cloned directory name]
+```
 
-Staging area. If you add a file to the staging area - `git add` - that is the version that will be committed during the next commit. Any modifications to the file after the last add will not be recorded in the next commit
+All this is doing is copying all the files from that hosted git repository to your local computer for you to work on.
 
+There are, of course, other flags you can pass in, such as `--bare`, or `--recurse-submodules`, but 98% of the time, that wont be necessary.
+
+### `git init`
+
+This is the other way to get started with a git repository. `git` has the capability to be run completely locally. There is no need to to link to a hosting provider such as GitHub if you dont want to. Just by running:
+
+```bash
+$ git init
+```
+
+You will create an empty git repository in your current directory. You can make use of all the same file versioning that you otherwise would.
+
+## Interacting with git locally
+
+### `git add`
+
+the `add` command just is one of the most fundamental commands throughout git. It adds files from your working directory, to your staging area.
+
+**working directory**: this is just your current directory and the current state of all your files, modified or not.\
+**staging area**: this is all the file snapshots that are going to be included in the next commit.
+
+It is important to note that if you add a file to your staging area, and then make more changes to it, those new changes will not be recorded in the staging area. You will need to `add` it again for those changes to appear in your next commit. You are adding a snapshot of the file in its current state, not the file itself.
+
+```bash
+$ git add src/index.html
+$ git add public/
+```
+* The first command will add the `index.html` file, which is in the `src` directory, to the staging area
+* The second command will add any untracked or modified files that are in the `public/` directory, or any of its recursive subdirectories
+
+:::note
+You will often hear people say, "Don't use `git add .`". I think this is terrible advice.
+The sentiment is that you should only include the files that make sense in your current commit, which I agree with. That being said, if _every_ file that has been modified should be included in this commit, it saves so much time writing `git add .`, instead of writing out the full path to every file.
+:::
+
+### `git commit`
+
+The `commit` command is what records any of the file snapshots / changes into the local git repository. Commits are meant to represent a single thought or action, such as "feat: adding logout functionality", or "bug: fixing history file truncation".
+
+Commits are the most fundamental objects in git, and are used for almost all other git operations.
+
+The most common way to make a commit is to pass in the commit message while doing so:
+```bash
+$ git commit -m "Brief description of the change made"
+```
+If you don't pass it in with the `-m` flag, it will open you `$EDITOR`, which is likely either `nano` or `vim`, to allow you to add the commit message there.
+
+You can also edit your previous commit, but this should __only__ be done if you haven't already pushed your changes to remote repository, as this will modify other's git history.
+```bash
+$ git commit --amend
+```
+
+### Branches
+
+Branches are a way to split up your ongoing changes, and keep your code organized. Every repository has a default "main" branch, but you can make as many as you desire for what you're working on.
+
+There are many ways to make branches. Here are the most common:
+```bash
+$ git checkout -b feature
+$ git branch feature # The previous branch is still active, you have not switched to feature yet
+$ git switch -c feature # `git switch` is a relativley new command, intended to replace `git checkout`
+```
+
+Whenever you make a commit, that commit will be applied to whatever branch you currently have active. If you make a new commit while
+
+:::note
+A branch is essentially just a named commit, _**which updates to reference any new commits that are made what that branch is checked out**_.
+:::
+
+### Tags
+
+Tags are literally just named commits. All commits have a hash that you can use to reference them; tags just give human recognizable names to these commits. They are usually used to indicate notable commits, such as software releases, homework checkpoints, etc.
+
+You can list all tags with:
+```bash
+$ git tag
+```
+
+Or create your own tag for the current commit with:
+```bash
+$ git tag v0.9.5
+```
+
+<video width="640" height="360" controls>
+    <source src="/tag-vs-branch.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+</video>
+
+### `git merge`
+
+Merging is a natural action that will occur when working with more than one branch. Eventually, you will want to bring the code from you `feature` branch back into `main`. That can be done in more than one way, but one of the most common is to "merge" that code in.
+
+This is usually done with the following command:
+```bash
+$ git merge main # if you currently have a branch other than main checked out
+```
+
+The branch you have checked out is the one that will be updated, and contain the **merge commit**.
+
+#### resolving a merge conflict
+
+If there are no conflicts between files, or it is clear what the end state of a file should be, git will resolve it directly, however, sometimes that is not the case. If the two branches both modified the same part of a file, git will not know what to do and there will be a conflict.
+
+`git` will notify you if that is the case, and put you in a temporary state while you resolve these conflicts. Once that is done, you can `git add`, and `git merge` like normal to make the merge commit, and it will be resolved.
+
+### rebase
+
+This is the other way to bring the changes from two branches together. Rather than having two branches that get merged with a merge commit, the entirety of the checked out branch (up to their common ancestor commit) gets placed on the head of the target branch
+
+Many teams in industry use this to have a linear, easy to understand commit history. Most teams at Amazon that I worked in or with required this.
+
+:::tip[Demo time]
+Time for a brief demo both in the terminal and in a visual representation
+:::
+
+## Interacting with remote repositories
+
+### push
+
+:::note
+You can have takes in remote repos such as GitHub, but you need to push them manually
+```bash
+$ git push --tags
+```
+:::
+
+### pull
 
 ### fetch
 and how its different than pull
 
-### resolving a merge conflict
+
+### .gitignore files
 
 ## `git` under the hood
 
@@ -32,23 +162,11 @@ and how its different than pull
 
 Commits are static and refer to the hash of the changed code, as well as the hash of the parent commit
 
-### Branches
-
-Branches are just tags that refer to a specific commit. If you make a new commit while attached to a specific branch, it will update the ref of the branch
-
-### Tags
-
-Tags are similar to branches, but they stay statically linked to commit even after a new commit
-
 ## Viewing status
 
 ### `git status`
 
 Shows the state of the git repo.
-
-### `git remote -v`
-
-Shows the remote repository link that you are both fetching from and pushing to
 
 ### `git show {hash}`
 
@@ -58,13 +176,13 @@ Allows you to inspect any individual commit
 
 Shows you a history of your commits, and a summary of information, including the hash, and commit message
 
-## `git` shortcuts
+## `git` aliases
 
 ### `g`
 
 This is a shell based alias/expansion that allows the letter `g` to expand into `git`. This is a super useful time-save when you're typing the word `git` hundreds of times a day
 
-You need to download `git-completion.bash` and set it up using the following
+You need to download `git-completion.bash` and set it up using the following in your `~/.bashrc`
 ```bash
 # https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
 test -f ${PATH_TO}/.git-completion.bash && . $_
@@ -132,3 +250,32 @@ An example of what the output looks like when I run it on my actual dotfiles rep
     settings = config --global --list --show-origin # can also use --local and --system
     conflicts = diff --name-only --diff-filter=U --relative # list files with (unresolved?) conflicts
 ```
+
+## GitHub
+
+### ssh keys
+
+activity for later if we have time. Watch my video
+
+### difference between git and github
+
+## Great resources
+
+* The [official git documentation](https://git-scm.com/docs/) is amazing, and incredibly clear
+* Interactive tools
+    * A great [git visualizer](https://git-school.github.io/visualizing-git/)
+    * A great website for [learning the basics](https://learngitbranching.js.org/)
+
+## Homework
+Everyone should have received an invite to be a collaborator on a git repo that I made
+1. Accept that invite
+2. Clone the `git@github.com:jtledon/stuco-intro-to-git.git` repo
+3. Make a new branch with the same name as your CMU alias
+4. Make a few commits
+5. Push your new branch to the repo.
+
+:::caution[Possible Errors]
+There might be issues about not having an upstream branch. Try resolving it on your own first, and if you are still having a hard time, reach out on slack.
+
+You might also run into issues about not having an ssh-key linked to your account. I have an old video on it [here](https://youtu.be/NRXBMrsCeIY?si=7WgnyF4CaYNCNlp4) that might help. There are times where you will also need to manually add it to Mac's Keychain, or your `ssh-agent` on linux. I can assist with that if need be.
+:::

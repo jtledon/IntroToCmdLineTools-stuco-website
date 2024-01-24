@@ -26,6 +26,10 @@ https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-res
 
 ### dangling commits
 
+### .gitignore files
+
+### git hooks
+
 ### bisect
 
 ### worktrees

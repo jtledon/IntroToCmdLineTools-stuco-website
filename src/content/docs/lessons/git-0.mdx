@@ -3,7 +3,7 @@ title: git:Basics
 description: An intro into the fundamentals in git
 sidebar:
     order: 1
-    hidden: true
+    hidden: false
     badge: New
 ---
 import { Image } from 'astro:assets';
@@ -127,11 +127,20 @@ If there are no conflicts between files, or it is clear what the end state of a 
 
 `git` will notify you if that is the case, and put you in a temporary state while you resolve these conflicts. Once that is done, you can `git add`, and `git merge` like normal to make the merge commit, and it will be resolved.
 
-### rebase
+### `git rebase`
 
 This is the other way to bring the changes from two branches together. Rather than having two branches that get merged with a merge commit, the entirety of the checked out branch (up to their common ancestor commit) gets placed on the head of the target branch
 
 Many teams in industry use this to have a linear, easy to understand commit history. Most teams at Amazon that I worked in or with required this.
+
+```bash
+# this will move all commits from the common
+# ancestor between main and the current branch,
+# and place them on the tip of main
+$ git rebase main
+```
+
+For the `rebase` command, `-i/--interactive` is a very important flag. It allows a lot of commit manipulation, and is most commonly used for _**squashing**_ commits, which is combining multiple commits into one.
 
 :::tip[Demo time]
 Time for a brief demo both in the terminal and in a visual representation
@@ -139,42 +148,96 @@ Time for a brief demo both in the terminal and in a visual representation
 
 ## Interacting with remote repositories
 
-### push
+### `git push`
+
+This command is used to put all the changes from your local repository into a remotely hosted repository, usually on GitHub, GitLab, or BitBucket.
+
+```bash
+$ git push
+```
+
+This will sometimes fail if you:
+1. Created the repo using `git init` and dont have a remote repo to push to yet
+2. Are pushing to branch that doesn't exist on the remote repo yet
+3. There is branch protection on the branch you are trying to push to
+
+To resolve these things:
+1. `git remote add origin <repo link> && git push -u origin main`
+2. `git push --set-upstream origin <branchname>`
+3. You will need to submit a Pull Request
 
 :::note
-You can have takes in remote repos such as GitHub, but you need to push them manually
+You _can_ have tags in remote repos such as GitHub, but you need to push them manually
 ```bash
 $ git push --tags
 ```
 :::
 
-### pull
+### `git pull`
 
-### fetch
-and how its different than pull
+This command is really important when working in a team. This is how you get any of the changes that they might have pushed to GitHub, down to your local repository so that you can work on and view them as well
 
+```bash
+$ git pull
+```
 
-### .gitignore files
+When doing this, do your best to make sure your working directory is clean, otherwise the pull will fail, rather than overwrite your data.
+
+### `git fetch`
+
+This is my preferred way of retrieving changes from a remote repository. What people don't often talk about is that `git pull` is exactly equivalent to `git fetch && git merge`.
+
+When I don't what is the commits that are about to be pulled down, I would rather fetch the updates first, inspect the changes, and then merge once I have decided that it is all clear.
 
 ## `git` under the hood
 
 ### Commits
 
-Commits are static and refer to the hash of the changed code, as well as the hash of the parent commit
+Commits are static and refer to the hash of the changed code, as well as the hash of the parent commit.
 
 ## Viewing status
 
+### `git diff`
+
+git has a built in way to view the differences between any number of different states in a git repo. You can view the differences between two different branches, between the HEAD commit and the working directory, or even the staged files
+
+```bash
+$ git diff # this will show the differences between the working directory and the HEAD commit
+$ git diff main feature # this will show the differences between the `main` and `feature` branches
+$ git diff @^^ --staged # this will show the difference between your currently staged files, and 2 commits above the HEAD commit
+```
+
 ### `git status`
 
-Shows the state of the git repo.
+This is my most frequently used git command: its just a way of viewing the current state of the repo. It will show you how many commits havent been pushed to your remote yet, what files have been modified, what files arent being tracked, and a ton of other useful information.
 
-### `git show {hash}`
+```bash
+$ git status
+```
 
-Allows you to inspect any individual commit
+I tend to like the abbreviated version of this command, for an update at a glance:
+```bash
+$ git status --branch --short
+```
+
+There are _lots_ of flags, that might be useful; you should take the time to read through them.
 
 ### `git log`
 
-Shows you a history of your commits, and a summary of information, including the hash, and commit message
+Shows you a history of your commits, and a summary of information, including the hash, and commit message. This is nice when you want to get a brief summary of all the changes that have been made, and what commit hashes they correspond to.
+
+```bash
+$ git log
+```
+
+### `git show`
+
+`git show` is very similar to `git log`: they both show you commit information. The difference is that `show` is made for looking at one specific commit, whereas `log` is made for viewing a range of commits.
+
+Usually you use `git show` to view more information about one commit once you have singled it out after using `git log`
+```bash
+$ git show {commit-hash}
+```
 
 ## `git` aliases
 
@@ -255,9 +318,11 @@ An example of what the output looks like when I run it on my actual dotfiles rep
 
 ### ssh keys
 
-activity for later if we have time. Watch my video
+Often times, you will need to setup ssh-keys to be able to push to a repository on github, even if its your own. I have a brief video [here](https://youtu.be/NRXBMrsCeIY?si=7WgnyF4CaYNCNlp4) about how to add ssh-keys to your account.
 
 ### difference between git and github
+
+I just want to re-iterate the differences between `git` the command-line tool, and GitHub, the service. `git` will work locally and manages the version control of your code. GitHub is a service that hosts your repos on the cloud for off-site backups, sharing, etc and adds additional features like Pull Requests and Issues.
 
 ## Great resources
 

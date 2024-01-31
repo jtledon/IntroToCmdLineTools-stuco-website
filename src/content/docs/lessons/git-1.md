@@ -135,8 +135,6 @@ Your stashed changes are global to the git repo. A common use-case of stashing i
 --sparse
 --cone
 
-### git hooks
-
 ## Homework
 
 This weeks homework is going to be a little bit more in depth. You will need to record a video of yourself:

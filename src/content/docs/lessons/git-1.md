@@ -138,11 +138,11 @@ Your stashed changes are global to the git repo. A common use-case of stashing i
 ## Homework
 
 This weeks homework is going to be a little bit more in depth. You will need to record a video of yourself:
-1. Using restore to remove a file from your staging directory without undoing the file contents
+1. Using `restore` to remove a file from your staging area without undoing the file contents
 2. Making a commit
 3. Pushing to your own remote repo made on GitHub
 4. `git reset --hard @^` over the commit you just made and pushed
 5. Showing the diff between your local branch, and the remote branch you just pushed to
-5. Getting that commit back and update the your branch to point at it
+5. Getting that commit back and updating your branch to point at it
 
 And email it to me with the title like: "[98172] HW2". Ideally, the video with be 2 minutes or less

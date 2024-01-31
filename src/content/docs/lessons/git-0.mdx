@@ -4,7 +4,7 @@ description: An intro into the fundamentals in git
 sidebar:
     order: 1
     hidden: false
-    badge: New
+    # badge: New
 ---
 import { Image } from 'astro:assets';
 import lga from '../../../assets/lga-branching.png';
@@ -142,6 +142,11 @@ $ git rebase main
 
 For the `rebase` command, `-i/--interactive` is a very important flag. It allows a lot of commit manipulation, and is most commonly used for _**squashing**_ commits, which is combining multiple commits into one.
 
+<video width="640" height="360" controls>
+    <source src="/merge-vs-rebase.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+</video>
+
 :::tip[Demo time]
 Time for a brief demo both in the terminal and in a visual representation
 :::
@@ -189,7 +194,11 @@ This is my preferred way of retrieving changes from a remote repository. What pe
 
 When I don't what is the commits that are about to be pulled down, I would rather fetch the updates first, inspect the changes, and then merge once I have decided that it is all clear.
 
-## `git` under the hood
+## `git` State
+
+### HEAD / @
+
+This is just the current commit that you are acting on. The HEAD ref can point to a commit, a tag or even just a branch.
 
 ### Commits
 
@@ -205,6 +214,8 @@ git has a built in way to view the differences between any number of different s
 $ git diff # this will show the differences between the working directory and the HEAD commit
 $ git diff main feature # this will show the differences between the `main` and `feature` branches
 $ git diff @^^ --staged # this will show the difference between your currently staged files, and 2 commits above the HEAD commit
+$ git diff -- pathspec # you can limit your diff to only a specific file
+$ git diff b68c4d7 # you can diff against a specific commit as well
 ```
 
 ### `git status`
@@ -239,9 +250,23 @@ Usually you use `git show` to view more information about one commit once you ha
 $ git show {commit-hash}
 ```
 
-## `git` aliases
+## `git` settings
 
-### `g`
+### git config files
+
+You can set define a file that stores a bunch of configuration changes, called a `gitconfig`. These will generally be located at:
+* `/etc/gitconfig`: system-wide git preferences
+* `$HOME/.gitconfig` or `$HOME/.config/git/config`: user-specific configurations
+* `local-repo/.git/.gitconfig`: repo-specific configurations (ex. )
+
+Usually, a section will have a heading in square brackets, and then their appropriate config options
+```bash
+[user]
+    email = jtledon@gmail.com
+    name = Jason Ledon
+```
+
+### `g` alias
 
 This is a shell based alias/expansion that allows the letter `g` to expand into `git`. This is a super useful time-save when you're typing the word `git` hundreds of times a day
 

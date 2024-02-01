@@ -130,6 +130,9 @@ Your stashed changes are global to the git repo. A common use-case of stashing i
 ### difftool (VSCode, meld)
 
 ### --patch/-p commits
+e command to modify the content of the chunk
+
+most commands have a `--patch` flag, which just lets you decide what parts of the file are being acted on
 
 ### git partial clone and git sparse checkout
 --sparse

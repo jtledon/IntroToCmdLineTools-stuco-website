@@ -146,6 +146,6 @@ This weeks homework is going to be a little bit more in depth. You will need to 
 3. Pushing to your own remote repo made on GitHub
 4. `git reset --hard @^` over the commit you just made and pushed
 5. Showing the diff between your local branch, and the remote branch you just pushed to
-5. Getting that commit back and updating your branch to point at it
+5. Getting the deleted commit back using the reflog and updating your branch to point at it
 
 And email it to me with the title like: "[98172] HW2". Ideally, the video with be 2 minutes or less

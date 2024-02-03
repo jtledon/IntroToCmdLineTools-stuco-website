@@ -27,8 +27,8 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="2.3609708"
-     inkscape:cx="84.287362"
-     inkscape:cy="101.44132"
+     inkscape:cx="83.440253"
+     inkscape:cy="74.333829"
      inkscape:window-width="1920"
      inkscape:window-height="1133"
      inkscape:window-x="334"
@@ -51,11 +51,45 @@
        height="24"
        x="65.170654"
        y="107.55041"
-       ry="5.1311111"
-       rx="4.6659131" />
+       ry="4"
+       rx="4" />
     <path
        id="path2-4"
        style="fill:#2a293c;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
-       d="m 75.061205,115.16944 -5.306393,3.88861 z m -5.306319,-3.88868 5.306334,3.88863" />
+       d="m 75.061205,117.28612 -5.306393,3.88861 z m -5.306319,-3.88868 5.306334,3.88863" />
+    <path
+       style="fill:#3b3b3b;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke markers fill"
+       d="m 78.750645,122.76224 h 9.436766"
+       id="path1" />
+    <g
+       id="g2"
+       transform="matrix(1.4857355,0,0,1.4857355,-32.222006,-41.286764)"
+       style="stroke-width:0.673067">
+      <rect
+         style="fill:#1f1f2c;fill-opacity:1;stroke:none;stroke-width:1.34613;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         id="rect2"
+         width="6.321785"
+         height="3.7429671"
+         x="68.414162"
+         y="98.662117" />
+      <circle
+         style="fill:#ff5f56;fill-opacity:1;stroke:#1f1f2c;stroke-width:1.68267;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         id="path2"
+         cx="68.414162"
+         cy="100.5336"
+         r="1.0301493" />
+      <circle
+         style="fill:#ffbd2e;fill-opacity:1;stroke:#1f1f2c;stroke-width:1.68267;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         id="path2-3"
+         cx="71.575058"
+         cy="100.5336"
+         r="1.0301493" />
+      <circle
+         style="fill:#27c93f;fill-opacity:1;stroke:#1f1f2c;stroke-width:1.68267;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         id="path2-6"
+         cx="74.735947"
+         cy="100.5336"
+         r="1.0301493" />
+    </g>
   </g>
 </svg>

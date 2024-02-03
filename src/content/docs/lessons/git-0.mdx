@@ -204,6 +204,10 @@ This is just the current commit that you are acting on. The HEAD ref can point t
 
 Commits are static and refer to the hash of the changed code, as well as the hash of the parent commit.
 
+:::note[commit-ish]
+For many git commands, you will often see `commit-ish` as a command parameter. This just refers to a possible way of referring to a specific commit. This could be via a `ref`, such as a branch or a tag (or other contents found in `.git/refs/`, or the sha1 hash of a commit)
+:::
+
 ## Viewing status
 
 ### `git diff`

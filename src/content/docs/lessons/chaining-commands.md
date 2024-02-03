@@ -26,6 +26,9 @@ redirection (`>` | `>>` | `2>&1 /dev/null` | `<` | `<<<`)
     - `echo "hi" 2>&1 > file.txt ` wont work because stdout was still pointing to terminal output buffer when redirecting stderr
     - https://phoenixnap.com/kb/bash-redirect-stderr-to-stdout#:~:text=examples%20of%20stdout.-,Redirecting%20stdout%20and%20stderr,represents%20the%20file%20descriptor%20number.
 
+Using input redirection with gdb is super useful when the binary is expecting input from stdin
+gdb ./binary
+run < input_file
 
 `$() vs `` `
 

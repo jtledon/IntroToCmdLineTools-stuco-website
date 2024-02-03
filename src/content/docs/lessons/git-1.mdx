@@ -6,6 +6,8 @@ sidebar:
     hidden: false
     badge: New
 ---
+import { Image } from 'astro:assets';
+import worktree from '../../../assets/worktrees.png';
 
 ## How to Undo State
 
@@ -123,16 +125,91 @@ Your stashed changes are global to the git repo. A common use-case of stashing i
 
 ### worktrees
 
+Worktrees enable you to have multiple branches active at once; you can essentially have multiple working directories active at once, in their own separate directories within your local repo.
+
+<Image
+    src={ worktree }
+    alt="Image of what the worktree layout is like"
+    width="400"
+/>
+
+This is really nice when, for example, you are working on a feature that isnt finished yet and then get an urgent bug report.
+
+The basic use cases for worktrees include:
+```bash
+$ git worktree add {new-dir-path} {commit-ish} # Create a new directory that houses the specified branch
+$ git worktree remove {worktree} # Remove the directory with the worktree
+```
+
+To learn a little bit more about worktrees and how I use them, you can check out a [video that I made](https://youtu.be/wIA-relB3Mc?si=o9BInN_6YaGSZlw5) on this topic.
+
+### patch commits
+Patch commits are just a fancy way of saying, "Pick out the parts/patchs from the file that I want to include in this commit, and leave the other parts out of the staging area."
+
+You can enter patch commit mode by adding the `--patch` flag, when using `git add` or `git commit`
+```bash
+$ git add --patch [path] ...
+$ git commit --patch [-m {message}] ...
+```
+
+Some of the available options when patch-adding are:
+* **y**: add the referenced hunk to the staging area / commit
+* **n**: do not add the referenced hunk to the staging area / commit
+* **e**: edit the hunk to select only the desired lines to add too the staging area / commit
+
+This is useful when you have made multiple modifications in a file, but they belong in two or more commits to make logical sense; you would separate them to make your intent clear.
+
+### cherry-picking
+
 ### bisect
 
 ### hooks
 
+A git hook is just a script that runs when git sees a specific event has been triggered. One such example is right before a commit occurs (`pre-commit`)
+
+A git hook is just a shell script with a special name that git looks for in `.git/hooks/`. All available hook actions match up with files that are already in the folder; to activate one of these actions, just remove the `.sample` suffix.
+
+Here is an example of a hook that I wrote to enforce `go fmt` on all committed files prior to the commit:
+```bash
+### pre-commit
+
+#!/bin/sh
+
+STAGED_GO_FILES=$(git diff --cached --name-only | grep ".go$")
+if [ "$STAGED_GO_FILES" = "" ]; then
+  exit 0
+fi
+
+PASS=true
+
+for FILE in $STAGED_GO_FILES
+do
+  go fmt $FILE
+  if [ $? != 0 ]; then
+    PASS=false
+  fi
+
+  git add $FILE
+done
+
+if ! $PASS; then
+  printf "COMMIT FAILED\n"
+  exit 1
+else
+  printf "COMMIT SUCCEEDED\n"
+fi
+
+exit 0
+```
+
+Common uses for hooks include:
+* Running a code formatter over your code
+* Building your project using the state of the proposed commit to make sure that it works
+* Ensuring your commit message match a certain format
+
+Usually tools/packages, such as [husky](https://github.com/typicode/husky), are used to abstract over writing shell scripts for this.
+
 ### difftool (VSCode, meld)
-
-### --patch/-p commits
-e command to modify the content of the chunk
-
-most commands have a `--patch` flag, which just lets you decide what parts of the file are being acted on
 
 ### git partial clone and git sparse checkout
 --sparse

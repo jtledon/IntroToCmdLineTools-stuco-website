@@ -9,6 +9,7 @@ export default defineConfig({
     integrations: [
         starlight({
             title: 'Intro to Command Line Tools StuCo',
+            favicon: '/ClassLogo_favicon.svg',
             social: {
                 github: 'https://github.com/jtledon'
             },

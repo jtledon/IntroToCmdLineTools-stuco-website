@@ -4,7 +4,7 @@ description: An intro into the fundamentals in git
 sidebar:
     order: 2
     hidden: false
-    badge: New
+    # badge: New
 ---
 import { Image } from 'astro:assets';
 import worktree from '../../../assets/worktrees.png';
@@ -79,7 +79,7 @@ And a real world interaction with a git repo:
 </video>
 
 :::caution
-the reflog will default to deleting entries older than 90 days. This can be tuned to your preference, though.
+`git` will start deleting entries from the reflog that are older than 90 days. This can be tuned to your preference, though.
 :::
 
 ### dangling commits
@@ -161,7 +161,25 @@ This is useful when you have made multiple modifications in a file, but they bel
 
 ### cherry-picking
 
+`cherry-pick`ing does exactly what it sounds like it should. It allows you to select a specific commit and apply it onto the tip of your HEAD. This is useful to get a commit that has an urgent change over from a branch and into another one without having to go through the process of merging the changes associated with every other commit.
+
+When dealing with cherry-picking, it is important to remember how commits are stored. Commits store hashes of entire files (blobs); if we just moved that commit over, we would be moving over the snapshot of that file, effectively overwriting the changes on our current branch. Instead, cherry-picking creates a diff between the current selected commit, and its parent, and then applies those changes into a new commit, which it places at our HEAD.
+
+<video width="640" height="360" controls>
+    <source src="/cherrypick-ex.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+</video>
+
 ### bisect
+`bisect` allows you walk through a section of your commits using binary search, to try and isolate where a certain (usually breaking or bug inducing) change was made.
+
+```bash
+$ git bisect start <known bad commit-ish> <known good commit-ish> # define the bounds for the binary searching to occur
+$ git bisect good|bad # mark the current commit as good or bad to perform a binary search split
+$ git bisect log # show the bisect state
+```
+
+When you are performing a bisect, you check out each commit individually, allowing you to perform some build step like `make` or other such test to figure out exactly where a bug was introduced.
 
 ### hooks
 
@@ -212,6 +230,7 @@ Usually tools/packages, such as [husky](https://github.com/typicode/husky), are 
 ### difftool (VSCode, meld)
 
 ### git partial clone and git sparse checkout
+
 --sparse
 --cone
 

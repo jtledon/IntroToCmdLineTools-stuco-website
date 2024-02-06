@@ -202,7 +202,28 @@ This is just the current commit that you are acting on. The HEAD ref can point t
 
 ### Commits
 
-Commits are static and refer to the hash of the changed code, as well as the hash of the parent commit.
+Commits are static. They are the `sha1` hash of the following fields:
+* **parent hash**: the `sha1` hash of the parent commit (doesn't exist for first commit in repo)
+* **author info**: who wrote the commit
+* **committer info**: who committed the commit
+* **root tree**: the tree datastructure is used to store which files were changed in a given commit. If a file wasn't changed, it just refers to the previous hash of that file from a previous commit to avoid duplicate data. If a file was changed, it will hash the entire new file, and store that in the tree for this commit. The root tree consists of the following types of data representations:
+    * **tree**: Like a normal tree data structure, tree nodes can point to other tree nodes. These represent directories that contain files that were modified within this commit.
+    * **blob**: These are like leaves within a normal tree structure; they represent the files that have changed within a commit. They contain the hash of the _**entire file**_, not just the changes. `git` stores a snapshot of the file.
+
+You can inspect this with some of the following commands:
+```bash
+$ git cat-file -p HEAD
+
+# tree cb862995e81c4972fa1d131b2f9322d738af382b
+# parent fca49ee98c444e97f46c639e9eadfb91f3e989e3
+# author Jason Ledon <jtledon@gmail.com> 1707180608 -0500
+# committer Jason Ledon <jtledon@gmail.com> 1707180608 -0500
+# Adding info on nesting the global command
+```
+
+That is why when rebasing, the commit hash changes for all associated commits. You have changed the hashes of all of their parent commits to an entirely new `sha1`. This also goes for changing the commit message: modifying the commit message or time will also update a commits `sha1` hash.
+
+You can read more about them [here](https://github.blog/2020-12-17-commits-are-snapshots-not-diffs/)
 
 :::note[commit-ish]
 For many git commands, you will often see `commit-ish` as a command parameter. This just refers to a possible way of referring to a specific commit. This could be via a `ref`, such as a branch or a tag (or other contents found in `.git/refs/`, or the sha1 hash of a commit)
@@ -213,6 +234,8 @@ For many git commands, you will often see `commit-ish` as a command parameter. T
 ### `git diff`
 
 git has a built in way to view the differences between any number of different states in a git repo. You can view the differences between two different branches, between the HEAD commit and the working directory, or even the staged files
+
+When computing a diff on two commits, git walks over the two trees to find any differences, and generates the diff on the fly, figuring out how a file has changed between the two snapshots.
 
 ```bash
 $ git diff # this will show the differences between the working directory and the HEAD commit
@@ -359,6 +382,7 @@ I just want to re-iterate the differences between `git` the command-line tool, a
 * Interactive tools
     * A great [git visualizer](https://git-school.github.io/visualizing-git/)
     * A great website for [learning the basics](https://learngitbranching.js.org/)
+* An [article](https://dev.to/tbroyer/how-i-teach-git-3nj3) going over many similar concepts
 
 ## Homework
 Everyone should have received an invite to be a collaborator on a git repo that I made

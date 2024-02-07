@@ -181,7 +181,7 @@ $ git bisect log # show the bisect state
 
 When you are performing a bisect, you check out each commit individually, allowing you to perform some build step like `make` or other such test to figure out exactly where a bug was introduced.
 
-### hooks
+### Hooks
 
 A git hook is just a script that runs when git sees a specific event has been triggered. One such example is right before a commit occurs (`pre-commit`)
 
@@ -227,12 +227,71 @@ Common uses for hooks include:
 
 Usually tools/packages, such as [husky](https://github.com/typicode/husky), are used to abstract over writing shell scripts for this.
 
-### difftool (VSCode, meld)
+### difftool
+various tools have been made to provide a fancy front-ends for `git diff`; these are called `difftool`s. These are nice when you are performing a complicated merge with lots of conflicts as they let you view the code a bit more naturally.
 
-### git partial clone and git sparse checkout
+Some of the most common ones are `VSCode` and `meld`
 
---sparse
---cone
+### Limiting repo size
+Both git partial clone and git sparse-checkout are viable options to limit the size of the repo on your machine. One really common example is with the use of Mono-repos in industry. As a developer, you dont need all 2 million files for all micro-services, you only need the one directory that contains the project you are working on. Reducing the directory size will significantly speed up common commands like `git status`, which need to
+
+#### Partial clone
+We recently talked about how git stores commit data in trees and blobs. When working in really large repos with 100s of GB of data, cloning that can take hours or days. Git provides a way to clone only the metadata, such as the commit messages and commit lineage, without downloading other file contents. When you do eventually need a file to work on, git will request it from the server in a JIT (Just In Time) fashion, limiting the upfront cloning cost and amortizing the requests.
+
+You can do so with the `--filter` flag when cloning
+```bash
+$ git clone --filter=blob:none <link> # dont download any file blobs
+$ git clone --filter=blob:limit=<n>[kmg] # git clone --filter=blob:limit=1k limits downloads of blobs larger than a kilobyte
+$ git clone --filter=object:type=(tag|commit|tree|blob) # omit all objects that are not of the requested type
+$ git clone --filter=... --filter=... # you can provide multiple filters, but only objects that match _both_ will be cloned
+```
+You can find a documentation on all possible filter-spec options [here](https://github.com/git/git/blob/master/Documentation/rev-list-options.txt).
+
+
+#### Sparse checkout
+Sparse checkout allows you to select only specific files or directories to be included in your working directory. When passing in the `--sparse` flag, only the files in the root of the directory are checked out by default. The files in the working directory can be updated later with the `git sparse-checkout` command.
+
+```bash
+$ git clone --sparse git@github.com:jtledon/repo.git # enable sparse-checkout and only include the root files by default
+$ git sparse-checkout add|set website/backend/api/ # add the files located at website/backend/api to the working directory
+```
+
+You can also pass the `--no-cone` options and pass in patterns rather than directory and file locations. These patterns follow the same syntax as `.gitignore`s.
+```bash
+$ git sparse-checkout set --no-cone '/*' '!**/logs' # include everything except for any logs directories
+```
+
+You can read more about how to use these features [here](https://github.blog/2020-01-17-bring-your-monorepo-down-to-size-with-sparse-checkout/) or watch a brief tutorial [here](https://www.youtube.com/watch?v=LMG_-uJVdsw).
+
+#### Combining them
+Sparse checkout and partial clone can work in conjunction with one another to make a speedy git experience on even the largest repos.
+
+```bash
+# only include the root files, and only download file blob data as its needed
+$ git clone --filter=blob:none --sparse git@github.com:jtledon/repo.git
+$ git sparse-checkout add|set website/backend/api/
+```
+
+### Submodules
+There are times when you need to include other git repositories within your current git repo so that you can use it in your project. You still want to be able to pull from those repos, but dont want your parent git project to track those files. This is the usecase for git submodules.
+
+```bash
+$ git submodule add repository_url [path] # add a new submodule to your repo
+$ git submodule foreach git pull
+```
+
+The settings and config for submodules can be found in the `.gitmodules` file.
+
+If you are cloning a repo that has submodules within it:
+```bash
+$ git clone --recurse-submodules # follow all recursive submodules and clone them all
+$ git clone --shallow-submodules # only clone submodules to a depth of 1
+```
+
+If your repo has submodules within it, but you forgot to clone it using `--recurse-submodules`:
+```bash
+$ git submodule update --init --recursive # initialize your repo as using submodules and clone them in recursively
+```
 
 ## Homework
 

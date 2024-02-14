@@ -132,7 +132,18 @@ fasd / zoxide / j / z / autojump
 searching through previous commands
 
 :::caution[Homework]
-There will be a file on the website under `regex/your_alias` where you will find a text file specifically for you. Download the file and look for
+There will be a file on the website under `regex/your_alias.txt` where you will find a text file specifically for you.
+
+You need to copy the text from that file and search for a portion of a string that:
+* has up to 3 hex characters preceding it
+* is wrapped in square or curly brackets
+* is a file name that ends in an 3 character file extension
+
+You should only match the portion inside the brackets; the file name.
+
+Some examples might be:\
+`C[asdfasdfa28234sa-asdf.txt]`\
+`14F{qYxsua.zip}`
 :::
 
 <style>

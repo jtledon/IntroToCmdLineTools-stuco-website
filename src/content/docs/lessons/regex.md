@@ -84,10 +84,13 @@ Sometimes you want to match something, depending on the context of the surroundi
 
 #### Non-capture groups
 
-Sometimes it can be helpful for group sections together, even if you have no need to refer to them later. When this is the case, you can use a non-capture group. This is nice when you have 7 other capture groups, and you dont want to add any more useless ones
+Sometimes it can be helpful to group sections together, even if you have no need to refer to them later. When this is the case, you can use a non-capture group. This is nice when you have 7 other capture groups, and you dont want to add any more useless ones
 ```bash
 (?:[a-z]+) # this syntax creates a capture group that cant be references later
 ```
+
+#### Others
+There are things like recursive searching and named capture groups that are available in many regex implementations. I personally don't use them, but I figured it was worth mentioning that they were available.
 
 ### Flags
 
@@ -118,18 +121,85 @@ The way regex's match can be modified depending on what flags you pass into it. 
     * [RegexGolf](https://alf.nu/RegexGolf?world=regex&level=r00)
     * [RegexCrossword](https://regexcrossword.com/)
 
-cat
-head
-tail [-F]
-watch
-diff
-diff-so-fancy
+## Fuzzy-Finding
 
-fzf
-    ctrl-r
-    ctrl-t
-fasd / zoxide / j / z / autojump
-searching through previous commands
+There are various tools that provide a fuzzy finder for text in your command-line. The most popular one is `fzf`, which is short for [F]u[Z]zy-[F]inder.
+
+### `fzf`
+
+#### Default mappings
+`fzf` comes with some built-in keybindings that are super useful.
+    * `<C-r>`: pastes the previous command from your command history into the terminal
+    * `<C-t>`: pastes the files selected from the UI into the command-line
+
+#### Extensibility
+
+`fzf` is also incredibly extensible. A ton of tools require `fzf` to be installed to run, and you can build tools on top of `fzf` yourself.
+
+I personally built an `fzf` selector that travels up to the root of any `golang` project, and from there, recursively travels into all sub-directories, making all go tests available to you to run.
+
+```bash
+function __gg() {
+    local dir=$PWD
+    while
+        # this loop automatically ends early after it finds any one of them
+        # Only need -quit in case two are in the same directory; -print -quit MUST be at the end
+        local RESULT=$(find "$dir"/ -maxdepth 1 \( -name "go.mod" -o -name "go.work" -o -name ".git" \) -print -quit) # target files come from neovims nvim-lspconfig autocommand which looks for the root dir to attach the language server: https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/gopls.lua
+        [[ -z $RESULT ]] && [[ "$dir" != "/" ]]
+    do dir=$(dirname "$dir"); done
+
+    # no go.mod or go.work directory was found and we worked back up to root
+    if [[ -z $RESULT ]]; then
+        echo "Couldn't find any go.mod, go.work or .git in parent directories"
+        return
+    fi
+
+    local fzf_opts='--reverse --height ~40% --min-height 10 --margin=1,15% --border=rounded --border-label=" go test -race -run " --info=hidden'
+    local output=$(
+            rg --no-line-number --no-filename --type go --no-messages "^func\s+(Test\w+)\(.*$" -r '$1' $(dirname "$RESULT") |
+            # rg --no-line-number --no-filename --glob '*.go' --no-messages '^func\s+(Test\w+)\(.*$' -r '$1' |
+            FZF_DEFAULT_OPTS="$fzf_opts" $(__fzfcmd) --query "$READLINE_LINE"
+    ) || return
+
+    # no selection was made due to exiting early w ESC, CTRL-C, etc
+    if [[ -z $output ]]; then
+        return
+    fi
+    # update the contents of READLINE, a bash global which contains the text on the current line
+    READLINE_LINE="go test -race -run ${output#*$'\t'}"
+
+    # update cursor position based on the starting posiiton when we called the keybinding
+    if [[ -z "$READLINE_POINT" ]]; then
+        echo "$READLINE_LINE"
+    else
+        READLINE_POINT=0x7fffffff
+    fi
+}
+bind -m emacs-standard -x '"\C-g": __gg'
+bind -m vi-command -x '"\C-g": __gg'
+bind -m vi-insert -x '"\C-g": __gg'
+```
+
+### Changing directories
+
+There are some tools that exist that allow you to jump between directories, without having to `cd` to their exact path.
+```bash
+$ z StuCo website # might take you to /home/jledon/stuco/StuCoWebsite
+```
+
+Some of the most common ones are:
+* `z`
+* `fasd`
+* `zoxide` (`z`, but rewritten in Rust)
+* `j`
+* `autojump`
+
+I personally use `z`, but plan to switch over to `zoxide` soon.
+
+#### `$CDPATH`
+
+You can also add really common paths to your `$CDPATH` environment variable. This allows you to `cd` into any directories in this directory, without actually being in them.
+
 
 :::caution[Homework]
 There will be a file on the website under `regex/your_alias.txt` where you will find a text file specifically for you.

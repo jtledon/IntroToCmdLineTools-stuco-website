@@ -1,7 +1,7 @@
 ---
 title: RegEx, Reading Files and Fuzzy Finding
 sidebar:
-    order: 4
+    order: 3
     hidden: true
     # badge: New
 ---

@@ -2,7 +2,7 @@
 title: grep, sed, awk, find
 description: A commandline window tiler, tmux
 sidebar:
-    order: 3
+    order: 4
     hidden: true
     # badge: New
 ---

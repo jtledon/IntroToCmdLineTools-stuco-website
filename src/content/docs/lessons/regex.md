@@ -201,24 +201,39 @@ I personally use `z`, but plan to switch over to `zoxide` soon.
 You can also add really common paths to your `$CDPATH` environment variable. This allows you to `cd` into any directories in this directory, without actually being in them.
 
 
-:::caution[Homework]
+:::note[Homework]
 There will be a file on the website under `regex/your_alias.txt` where you will find a text file specifically for you.
 
 You need to copy the text from that file and search for a portion of a string that:
-* has up to 3 hex characters preceding it
+* has up to 3 hex characters preceding it (both "A" and "a" are valid hex)
 * is wrapped in square or curly brackets
 * is a file name that ends in an 3 character file extension
 
-You should only match the portion inside the brackets; the file name.
+The regular expression should only match the portion inside the brackets, excluding the period and extension: only the file name.
 
-Some examples might be:\
-`C[asdfasdfa28234sa-asdf.txt]`\
-`14F{qYxsua.zip}`
+Some examples might be:
+```python
+C[fa28234sa-q.txt] # matches "fa28234sa-q"
+8a4[qwebyacyz.jpg] # matches "qwebyacyz"
+14F{qYxsua.zip}    # matches "qYxsua"
+```
+
+Whereas a counter example might be:
+```txt
+G1a[notes.txt]   # doesn't match: G isn't hex
+\n{bin.tar}      # doesn't match: isn't preceded by hex
+7B2[README.md]   # doesn't match: not a 3 character file extension
+F<y7zqqpzab.stl> # doesn't match: surrounded by <> and not [] or {}
+```
+
+Submissions will be made on canvas, with instructions on how to run the regular expression, and the expression itself. Preferably, it will be using PCRE2 on [regex101.com](https://regex101.com/).
 :::
 
 <style>
     ul {
         /* background: red; */
-        line-height: 1.4;
+        line-height: 1.35em;
+        /* margin: 0px; */
+        /* transform: translateY(-24px); */
     }
 </style>

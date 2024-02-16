@@ -220,7 +220,7 @@ C[fa28234sa-q.txt] # matches "fa28234sa-q"
 
 Whereas a counter example might be:
 ```txt
-G1a[notes.txt]   # doesn't match: G isn't hex
+1aG[notes.txt]   # doesn't match: G isn't hex
 \n{bin.tar}      # doesn't match: isn't preceded by hex
 7B2[README.md]   # doesn't match: not a 3 character file extension
 F<y7zqqpzab.stl> # doesn't match: surrounded by <> and not [] or {}

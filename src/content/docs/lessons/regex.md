@@ -3,7 +3,7 @@ title: RegEx and Fuzzy Finding
 sidebar:
     order: 3
     hidden: false
-    badge: New
+    # badge: New
 ---
 
 ## RegEx (Regular Expressions)

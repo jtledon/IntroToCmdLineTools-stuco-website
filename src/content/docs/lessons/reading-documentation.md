@@ -1,6 +1,6 @@
 ---
 title: Reading documentation
-description: An intro into the fundamentals in git
+description: A brief introduction about several different ways to read the documentation on linux commands
 sidebar:
     # label: Custom auto-generated label
     order: 0

@@ -112,9 +112,13 @@ $ NR # number of rows met thus far
 
 ## Modifying text (`sed`)
 
-All of the commands I have shown up to this point take the text out of a file, and search for something, or reorder the text in some way. What if we wont to modify the contents of a file? That is what `sed` is for.
+All of the commands I have shown up to this point take the text out of a file, and search for something, or reorder the text in some way. What if we wont to modify the contents of a file? That is what `sed` can be used for.
 
-I personally don't use `sed` very often, but
+I personally don't use `sed` very often, but it allows you to modify the text of a file, in-place. The most common use is a simple find and replace of text in a file:
+```bash
+$ sed 's/foo/bar/g' file.txt # replace all instances of "foo" with "bar"
+$ sed --in-place --regexp-extended '/^ssh [[:digit:]]/d' $FILE # delete all lines that start with "ssh \d"
+```
 
 ## Accessing the text in files
 
@@ -137,6 +141,18 @@ The `-F` flag is particularly useful when data is continuously being written to 
 ```bash
 $ tail -F long-running.out
 ```
+
+### `diff`
+
+You don't have to rely on on `git` to do all of your file diff's. You can pass in two file paths, and it will do its best to find the difference between them.
+
+```bash
+$ diff file1.txt file2.txt
+```
+
+There are, of course, tons of commandline flag options that you can pass in.
+
+## Homework
 
 :::note[Homework]
 This homework will be similar to the previous homework. There will be a new file generated for you at `https://intro-to-cmdline-tools.jtledon.com/parsetext/<alias>.txt`.

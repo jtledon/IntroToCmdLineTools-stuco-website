@@ -165,6 +165,7 @@ This homework will be similar to the previous homework. There will be a new file
     * contains a valid persons name (first and last name only)
         * this will only contain letters (no numbers or special characters)
         * might have any amount of whitespace between the first and last name
+        * Proper / Title case
         * `Jason Ledon`
         * `Tyler\t\tMason`
     * contains a valid ISO-8601 date

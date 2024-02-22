@@ -165,19 +165,23 @@ This homework will be similar to the previous homework. There will be a new file
     * contains a valid persons name (first and last name only)
         * this will only contain letters (no numbers or special characters)
         * might have any amount of whitespace between the first and last name
-        * Jason Ledon
-        * Tyler          Mason
+        * `Jason Ledon`
+        * `Tyler\t\tMason`
     * contains a valid ISO-8601 date
         * 20240221
         * 20241442 is not valid because in 2024-14-42, the 14th month and 42nd day doesnt exist
-* Reorder the text such that it is `name : social security num : <month>-<day>-<year>`
+* Reorder the text such that it is `name : social-security-num : <month>-<day>-<year>`
 
 This all should be done in a single pipeline of commands in the command-line. I will be running this in the Dockerfile, so if you command works there, you can assume it will work when I'm grading it as well.
 
 This might look like `cat ... | grep ... | ... | ... `
 
 An input text and expected output could be the following:
+```bash
 234-331923       Jason             Tyler 19931106
 Jason Tyler : 11-06-1993 : 234-33-1923
+```
+
+Submit this on the Week6 canvas assignment.
 :::
 

@@ -186,3 +186,36 @@ Jason Tyler : 11-06-1993 : 234-33-1923
 Submit this on the Week6 canvas assignment.
 :::
 
+For this homework, you should be working in the docker container I made for this class. Here are some notes about how to work with the file from the website, while inside the docker container.
+
+### Writing it to a file
+One way would be to just write the random data generated specifically for you, to a file. You can do this either by copying and pasting it, or using `curl`. I will be showing the `curl` version:
+```bash
+$ curl -s https://intro-to-cmdline-tools.jtledon.com/parsetext/<alias>.txt > <alias>.txt # using output redirection to write to a file (ex. jledon.txt)
+```
+
+If you ran that command from within the docker container, then you're done. This issue with that is if you are using the `--rm` flag when running the container, it will disappear and you need to remember to fetch the data and write it to a file each time you start a new container. To get around this, you could either:
+1. Stop using the `--rm` flag, not delete the container every time, and just reattach to the same container the next time. This will allow the file to persist in the container.
+2. Attach a volume to your container that allows you to pass in part of your directory into the docker container
+
+I prefer to use the second version; here would be a command that allows you to do that:
+volumes (if you write it to a file)
+
+```bash
+$ docker pull jasonledon/stuco:latest && docker run -v $PWD:/passthru --rm -it jasonledon/stuco:latest /bin/bash
+```
+Explaining what this command does:
+1. **`docker pull jasonledon/stuco:latest`**: pulling the latest version of the class docker image from dockerhub
+2. **`docker run`**: run the specified image as a container
+3. **`-v $PWD:/passthru`**: Creating a volume. This essentially links your current working directory from where you run this command, to the `/passthru` directory in the container. Please keep in mind that any changes you make to this directory will actually effect your system in the directory. If you run rm or something, you will actually be deleting files on your machine. Its just really useful for persistent changes made in a docker container
+4. **`--rm`**: delete this container instance once I exit
+5. **`-i`**: interactive communication with the terminals `stdin`
+6. **`-t`**:  allocate a TTY
+7. **`/bin/bash`**: The entry command to run
+
+### Fetching the data from the website
+Alternatively, you could skip setting up a volume and just use a network request to fetch the data each time as the start of your chain of commands. This is likely the easiest and preferred solution for this homework.
+```bash
+$ curl -s https://intro-to-cmdline-tools.jtledon.com/parsetext/<alias>.txt | grep ... | ...
+$ curl -s https://intro-to-cmdline-tools.jtledon.com/parsetext/<alias>.txt |& grep ... | ...
+```

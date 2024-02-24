@@ -120,6 +120,15 @@ $ sed 's/foo/bar/g' file.txt # replace all instances of "foo" with "bar"
 $ sed --in-place --regexp-extended '/^ssh [[:digit:]]/d' $FILE # delete all lines that start with "ssh \d"
 ```
 
+## JSON data (`jq`)
+
+`jq` is a tool that is incredibly useful when going through JSON data. You can pass in files, or `stdin` data, just like with `grep`, and it lets you easily filter and search through JSON data.
+
+```bash
+$ curl -s 'https://jsonplaceholder.typicode.com/users' | jq ".[5].address.geo"
+$ jq ".networks.[0].address" config.json
+```
+
 ## Accessing the text in files
 
 ### `cat`

@@ -1,10 +1,10 @@
 ---
-title: grep, sed, awk, find
+title: Parsing Text (grep, sed, awk, find)
 description: Parse data way faster than you ever have before
 sidebar:
     order: 4
     # hidden: true
-    badge: New
+    # badge: New
 ---
 
 ## Finding files (`find`)

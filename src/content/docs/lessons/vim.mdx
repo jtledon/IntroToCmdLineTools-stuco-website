@@ -15,7 +15,7 @@ import vim_mode_trasitions from '../../../assets/vim-modes-transition-diagram.sv
 * Using vim encourages you to learn about how exactly your editor and environment works
 * vim gives you a language to more naturally express your changes
 
-{/* comment
+{/* comment */}
 ## History
 * ed
     * short for "editor"
@@ -32,7 +32,6 @@ import vim_mode_trasitions from '../../../assets/vim-modes-transition-diagram.sv
 * nvim
     * community maintained version of vim
     * configured using the `lua` programming language
-*/}
 
 ## Changes are atomic
 When editing text in vim, you should think about it in terms of actions on text objects, not as modifying individual characters.
@@ -91,15 +90,14 @@ Even if you don't switch to using `vim` full time as your editor like I have, I 
     * `G` - go bottom
     * `^` - first (non-whitespace) character on a line
     * `$` - last character on a line
-
-
-:q[!]
-:wq (write and quit)
-/?nN
-
-aiAI
-
-yank paste
+* Copying
+    * `y` - yank
+    * `p` - paste
+* Entering insert mode
+    * `i` - insert
+    * `I` - insert at the front of the line
+    * `a` - append
+    * `A` - append at the end of the line
 
 ### Text Objects
 One of the best things about vim is that it defines text objects that you can interact with. Some examples are:
@@ -109,6 +107,17 @@ One of the best things about vim is that it defines text objects that you can in
 * `it` - inside tag
 
 These can all be combined with actions such as delete, change, visual selection
+
+## vim commands
+
+* `:q[!]`
+* `:wq` (write and quit)
+* search
+    * `/`
+    * `?`
+    * `n`
+    * `N`
+* `:set wrap`
 
 ## Plugins
 vim and nvim are made to be extensible so the community has made thousands of plugins that do pretty much anything you might need. Some of the ones that I cant live without:

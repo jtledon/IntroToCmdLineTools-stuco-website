@@ -189,7 +189,7 @@ This might look like `cat ... | grep ... | ... | ... `
 An input text and expected output could be the following:
 ```bash
 234-331923       Jason             Tyler 19931106
-Jason Tyler : 11-06-1993 : 234-33-1923
+Jason Tyler : 234-33-1923 : 11-06-1993
 ```
 
 Submit this on the Week6 canvas assignment.

@@ -1,0 +1,112 @@
+---
+title: Intro to [neo]vim
+sidebar:
+    order: 5
+    # hidden: true
+    badge: New
+---
+import { Image } from 'astro:assets';
+import vim_mode_trasitions from '../../../assets/vim-modes-transition-diagram.svg';
+
+## Benefits
+* Some form of vi or vim will be on every linux computer or server
+* Useful when doing SSH work because it runs in the commandline and doesnt require a GUI or X11 Forwarding support
+* You can customize it to fit exactly what your preference it. You have access to the entire API: you arent locked to some json config files.
+* Using vim encourages you to learn about how exactly your editor and environment works
+
+{/* comment
+## History
+* ed
+    * short for "editor"
+    * pioneered the idea of modal text editing
+    * was designed for an used in an era when you could only display one line of text at a time
+* vi
+    * expanded on the groundwork laid out by ed
+    * allows you to view multiple lines at once
+    * created the idea text object objects and actions
+* vim
+    * [Vi] I[m]proved
+    * The pesonal project of a man named Bram Moolenaar
+    * The binary is written in C but the configuration is done in a bespoke language he made called "vim-script"
+* nvim
+    * community maintained version of vim
+    * configured using the `lua` programming language
+*/}
+
+## Changes are atomic
+When editing text in vim, you should think about it in terms of actions on text objects, not as modifying individual characters
+
+`[c]hange [w]ord`
+
+
+`.` repeats that
+[count] + verb + noun
+[repetitions] + operation + target
+Try to remember everything as a neumonic
+
+## Modal editor
+### Normal mode
+### Insert mode
+### Visual mode
+### Command mode
+### Transition Diagram
+<Image
+    src={ vim_mode_trasitions }
+    alt="Diagram of (most of) the transitions between different modes in vi/vim/nvim"
+    width="1000"
+/>
+
+## vim Motions
+Even if you don't switch to using `vim` full time as your editor like I have, I think you should at least try using vim motions in your IDE. Intellij, VSCode, Zed, Sublime, etc. all have vim motion bindings.
+hjkl
+wWeEbB
+fFtT
+gg G
+^$
+
+:q[!]
+:wq (write and quit)
+
+aiAI
+
+/?nN
+yank paste
+
+TODO: this is how I should introduce vi
+
+
+2 delete word
+delete inner/inside word
+change inside "
+
+## Niceties
+
+### Capslock -> ESC
+When using vi/vim/nvim, you find yourself pressing Escape a lot to switch between modes and cancel operations. This can be cumbersome considering how far the ESC key is on most keyboards. I personally remap the capslock key to behave as the ESC key, and I recommend that anyone who uses vim does the same.
+
+In Windows you can use AutoHotkey
+```txt
+#Requires AutoHotKey v2.0+
+#Warn  ; Enable warnings to assist with detecting common errors.
+SendMode "Input"  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
+#SingleInstance Force
+
+; Capslock send ESC key
+Capslock::Esc
+
+; Shift+Capslock will toggle Capslock state
++CapsLock:: {
+    SetCapsLockState(!GetKeyState("CapsLock", "T"))
+}
+```
+### $EDITOR env var
+If you want to define `vim` or `neovim` as the default editor in your shell, you can export the `EDITOR` environment variable. This will set your preferred editor to open when dealing with things such as commit messages.
+```bash
+$ export EDITOR=nvim
+```
+
+## Additional References
+* `:Tutor` - a command that takes you to a vim practice session where you can practice with motions
+* [thoughtbot - Mastering the Vim Language](https://www.youtube.com/watch?v=wlR5gYd6um0)
+* There is no substitution for time in the editor and practice if this is something you want to get good at.

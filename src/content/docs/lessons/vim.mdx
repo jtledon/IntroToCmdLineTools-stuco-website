@@ -140,10 +140,11 @@ Some plugins extend this concept of actions you can perform on text objects.
 
 ## Interacting with the nvim api in the editor
 ```bash
-$ :lua vim.api.nvim_get
+$ :lua vim.api.nvim_buf_get_name(0)
 ```
+
 * `:lua` - execute a lua chunk of code
-* `vim.api`
+* `vim.api.nvim_buf_get_name(0)` - Gets the full file name for the buffer
 
 ## Niceties
 

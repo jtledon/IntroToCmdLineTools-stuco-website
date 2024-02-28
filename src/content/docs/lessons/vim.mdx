@@ -13,6 +13,7 @@ import vim_mode_trasitions from '../../../assets/vim-modes-transition-diagram.sv
 * Useful when doing SSH work because it runs in the commandline and doesnt require a GUI or X11 Forwarding support
 * You can customize it to fit exactly what your preference it. You have access to the entire API: you arent locked to some json config files.
 * Using vim encourages you to learn about how exactly your editor and environment works
+* vim gives you a language to more naturally express your changes
 
 {/* comment
 ## History
@@ -34,21 +35,33 @@ import vim_mode_trasitions from '../../../assets/vim-modes-transition-diagram.sv
 */}
 
 ## Changes are atomic
-When editing text in vim, you should think about it in terms of actions on text objects, not as modifying individual characters
+When editing text in vim, you should think about it in terms of actions on text objects, not as modifying individual characters.
 
-`[c]hange [w]ord`
+Actions generally respect the following structure\
+`[repetitions] + operation + target`\
+`[count] + verb + noun`
 
+`[c]hange [w]ord`\
+`2 [c]hange [w]ord`
 
 `.` repeats that
-[count] + verb + noun
-[repetitions] + operation + target
-Try to remember everything as a neumonic
+
+vim tries very hard to make fit all commands as mnemonics for the action it performs:
+* [**c**]hange
+* [**d**]elete
+* [**i**]nsert
+* [**a**]ppend
+* [**p**]aste
+* [**y**]ank (copy)
 
 ## Modal editor
-### Normal mode
-### Insert mode
-### Visual mode
-### Command mode
+`vim` is a modal editor. It is unlike most other text editors where you can just navigate to a location and start typing. You need to enter the insert mode before you can do that.
+
+* **Normal mode**: Normal mode is the mode you start in. It allows you do navigate around the document and in the landing point between other modes.
+* **Insert mode**: The mode that actually lets you enter text.
+* **Visual mode**: The "highlight" mode. It allows you to visually make selections before performing operations on them.
+* **Command mode**: Allows you to interact with the extensive set of vim commands
+
 ### Transition Diagram
 <Image
     src={ vim_mode_trasitions }
@@ -57,27 +70,71 @@ Try to remember everything as a neumonic
 />
 
 ## vim Motions
-Even if you don't switch to using `vim` full time as your editor like I have, I think you should at least try using vim motions in your IDE. Intellij, VSCode, Zed, Sublime, etc. all have vim motion bindings.
-hjkl
-wWeEbB
-fFtT
-gg G
-^$
+Even if you don't switch to using `vim` full time as your editor like I have, I think you should at least try using vim motions in your IDE. Intellij, VSCode, Zed, Sublime, and all major text editors have vim bindings.
+
+* Basic motions
+    * `j` - down
+    * `k` - up
+    * `h` - left
+    * `l` - right
+* Word movements
+    * `w` - word
+    * `e` - end of word
+    * `b` - back
+* Jump
+    * `f <letter>` - forward
+    * `F <letter>` - inverse of forward (backwards)
+    * `t <letter>` - til (until)
+    * `T <letter>` - inverse of til
+* General navigation
+    * `gg` - go top
+    * `G` - go bottom
+    * `^` - first (non-whitespace) character on a line
+    * `$` - last character on a line
+
 
 :q[!]
 :wq (write and quit)
+/?nN
 
 aiAI
 
-/?nN
 yank paste
 
-TODO: this is how I should introduce vi
+### Text Objects
+One of the best things about vim is that it defines text objects that you can interact with. Some examples are:
+* `iw` - inside word
+* `i"` - inside quotes
+* `a}` - around curly braces
+* `it` - inside tag
 
+These can all be combined with actions such as delete, change, visual selection
 
-2 delete word
-delete inner/inside word
-change inside "
+## Plugins
+vim and nvim are made to be extensible so the community has made thousands of plugins that do pretty much anything you might need. Some of the ones that I cant live without:
+* nvim-telescope/telescope.nvim
+* hrsh7th/nvim-cmp
+* theprimeagen/harpoon
+* mbbill/undotree
+* numToStr/Comment.nvim
+* kylechui/nvim-surround or tpope/vim-surround
+* mg979/vim-visual-multi
+* wellle/targets.vim
+* tpope/vim-repeat
+
+Some plugins extend this concept of actions you can perform on text objects.
+
+`*-surround` plugins allows add some really useful actions onto these text objects
+* `cs"'` - change surrounding " to '
+* `ysiw]` - y surround inside word ]
+* `dsf` - delete surround function
+
+## Interacting with the nvim api in the editor
+```bash
+$ :lua vim.api.nvim_get
+```
+* `:lua` - execute a lua chunk of code
+* `vim.api`
 
 ## Niceties
 
@@ -106,7 +163,16 @@ If you want to define `vim` or `neovim` as the default editor in your shell, you
 $ export EDITOR=nvim
 ```
 
+## Topics to look into if you're interested
+* Macros
+* Buffers
+* Registers
+* Marks
+* `g` Global command
+* Jump list and Quickfix list
+
 ## Additional References
 * `:Tutor` - a command that takes you to a vim practice session where you can practice with motions
+* `:help <keyword>` - A vim command that will take you to the vim documentation about what you are looking for `:help y`
 * [thoughtbot - Mastering the Vim Language](https://www.youtube.com/watch?v=wlR5gYd6um0)
 * There is no substitution for time in the editor and practice if this is something you want to get good at.

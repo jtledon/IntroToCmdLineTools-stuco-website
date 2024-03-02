@@ -48,6 +48,15 @@ $ sort -u <(cat file1 file2) # combine file1 and file2 into a singular file, sor
 ```
 this is a bash specific thing, zsh has something similar though
 
+
+
+```bash
+$ head -n 5 file.txt > >(grep "word")
+```
+>() stands in the place of where a file would be. Rather than the command writing to that fd, the output that would have been written is piped into the command inside, and it gets ran.
+> expects a file to write to. Rather than passing in a filename, we pass in >(), which is a fd that runs a command instead.
+
+
 signals
 
 error / return codes

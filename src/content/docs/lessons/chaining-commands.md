@@ -16,7 +16,7 @@ Piping |
 
 xargs
 
-redirection (`>` | `>>` | `2>&1 /dev/null` | `<` | `<<<`)
+## redirection (`>` | `>>` | `2>&1 /dev/null` | `<` | `<<<`)
 `> || 1>` - redirect stdout
 `2>` - redirect stderr
 `&>` - redirect both stdout and stderr
@@ -35,7 +35,18 @@ Using input redirection with gdb is super useful when the binary is expecting in
 gdb ./binary
 run < input_file
 
+## Command substitution
 `$() vs `` `
+
+## Process substitution
+Used when you want to run a command and send that commands output into another
+But that second command doesnt take input from stdin so you cant use pipes (|) or input redirection (<), only from files
+You could just run the command, and redirect the output to a .tmp file, but then you have to make a file
+Instead, you can use process substitution ( <() ), which runs the command and acts as a fd
+```bash
+$ sort -u <(cat file1 file2) # combine file1 and file2 into a singular file, sort them and remove dups
+```
+this is a bash specific thing, zsh has something similar though
 
 signals
 

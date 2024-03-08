@@ -226,6 +226,8 @@ Whereas a counter example might be:
 F<y7zqqpzab.stl> # doesn't match: surrounded by <> and not [] or {}
 ```
 
+There should only be one line in the file that matches.
+
 Submissions will be made on canvas, with instructions on how to run the regular expression, and the expression itself. Preferably, it will be using PCRE2 or ECMAScript on [regex101.com](https://regex101.com/).
 :::
 

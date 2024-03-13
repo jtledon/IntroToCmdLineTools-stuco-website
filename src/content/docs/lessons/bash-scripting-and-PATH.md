@@ -11,7 +11,7 @@ sidebar:
 file globbing
 `*.{c,h}`
 
-`./` vs `source` vs adding to PATH
+`bash {script}` vs `./` vs `source` vs `.` vs adding to PATH
 
 `()` vs `(())` vs `[[]]` vs `[]` vs test in `if` conditions
 
@@ -26,3 +26,6 @@ interactive vs non-interactive shells: what they are and the impact that it has
 `""` vs `''` - `""` allows for bash interpolation such as `"$HOME"`, which will be computed as `/home/jasonledon/`, but `''` treats it as a full string
 
 cron jobs for automating commands to run at a specific time
+
+Environment variables
+$PATH

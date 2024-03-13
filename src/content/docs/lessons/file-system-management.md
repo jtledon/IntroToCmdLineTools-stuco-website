@@ -29,6 +29,9 @@ kill
 
 fuser
 
+the general linux file system (/bin, /usr, /mnt, /dev, ...)
+
+
 ### Additional fun section I'm considering  <!-- TODO: should this be its own day? idt so, not enough content -->
 BAD practices that people should use
 * using sudo for everything when you run into permissions issues

@@ -73,4 +73,4 @@ A special example is `$HOME/.ssh/config`, which is in the `.ssh/` folder, which 
 
 ## Homework
 
-Create and submit 3 personalized dotfiles (`.bashrc`, `.gitconfig`, etc.), with 5 or more custom settings per file. Each line should be commented as to why this is a beneficial change for your setup.
+Create and submit 3 personalized dotfiles (`.bashrc`, `.gitconfig`, etc.), with 5 or more custom settings per file. Each line should be commented as to why this is a beneficial change for your setup. Submit these 3 or more files to the appropriate assignment on canvas.

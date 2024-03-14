@@ -38,4 +38,4 @@ You can also write a script that will open panes/windows/sessions in a repeatabl
 
 ## Homework
 
-Record a video of yourself using vim to edit 3 different config files of your choosing. Make sure to include navigating multiple tmux panes and windows. The video should be no longer than a minute.
+Record a video of yourself using vim to edit 3 different config files of your choosing. Make sure to include navigating multiple tmux panes and windows. The video should be no longer than a minute and you cannot use the mouse when interacting with either `vim` or `tmux`. Submit the video to the appropriate assignment on canvas.

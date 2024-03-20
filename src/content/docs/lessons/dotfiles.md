@@ -4,7 +4,7 @@ description: How to configure your development environment with files, so that y
 sidebar:
     order: 6
     # hidden: true
-    badge: New
+    # badge: New
 ---
 
 ## Config files

@@ -4,7 +4,7 @@ description: A commandline window tiler, tmux
 sidebar:
     order: 7
     # hidden: true
-    badge: New
+    # badge: New
 ---
 
 ## The benefit that TMUX provides

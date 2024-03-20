@@ -61,3 +61,12 @@ signals
 
 error / return codes
 
+## Homework
+
+make a pipeline that reads from a file, sorts it based on the most common words, and writes to stdout all the (now sorted) words. In this pipeline, any words that have a count >= 10 should be printed to stdout in red.
+
+you need to use input redirection, pipes, and process substitution in your pipeline
+
+look into ascii escape codes (give example of a basic echo)
+look into `sort` and `uniq` commands
+not allowed to use `awk`

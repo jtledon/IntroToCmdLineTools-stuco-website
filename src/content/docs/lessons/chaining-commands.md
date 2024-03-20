@@ -42,6 +42,11 @@ Each command has 3 file descriptors: `stdin`, `stdout`, and `stderr`. They each 
 :::
 
 #### basic redirection (`>` and `>>`)
+<!-- TODO: show stdout and stderr without any modifications
+```bash
+$ curl https://intro-to-cmdline-tools.jtledon.com/parsetext/jledon.txt | grep Amanda
+``` -->
+
 The most common form of redirection is `>`. This is the basic redirection that will send `stdout` (but not `stderr`) to a file of your choosing. You can view this with the following command; notice that the `stdout` gets put in the file but `stderr` still prints to the terminal.
 ```bash
 $ curl https://intro-to-cmdline-tools.jtledon.com/parsetext/jledon.txt > only-stdin.txt

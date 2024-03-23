@@ -202,11 +202,14 @@ Submit your own set of commands that use all of the following:
 
 You can have these commands do whatever you want. When you submit the command, include a summary of what this command or pipeline of commands does and what problem it solves.
 
-For 4 extra credit points on the assignment, submit a pipeline that has 4 or more of these in it. You cannot use `;` to split it up. For example, you could use pipes, processes substitution, command substitution and output redirection. If you do this, you dont need to repeat any of these in other command strings submitted (although you could if you wanted or needed to).
 
 When using `<()`, you cant do something like `diff <(cat file.txt)` instead of just doing `diff file.txt` because no meaningful change was made; however, if you use something more substantial than `cat`, that would be fine.
 
 I couldnt think of an assignment that would force you to use all of these, so the best I can do is encourage you to use them on your own and think of use-case. I know you can, but try not to use ChatGPT; if everyone uses ChatGPT or the provided examples on the man pages everyone is going to have the same solutions which will be super boring to grade.
+
+:::note[Extra Credit]
+For 4 extra credit points on the assignment, submit a pipeline that has 4 or more of these in it. You cannot use `;` to split it up. For example, you could use pipes, processes substitution, command substitution and output redirection. If you do this, you dont need to repeat any of these in other command strings submitted (although you could if you wanted or needed to).
+:::
 
 <!-- make a pipeline that reads from a file, sorts it based on the most common words, and writes to stdout all the (now sorted) words. In this pipeline, any words that have a count >= 10 should be printed to stdout in red.
 

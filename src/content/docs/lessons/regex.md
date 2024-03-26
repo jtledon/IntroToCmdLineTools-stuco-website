@@ -89,8 +89,37 @@ Sometimes it can be helpful to group sections together, even if you have no need
 (?:[a-z]+) # this syntax creates a capture group that cant be references later
 ```
 
+#### Recursive regular expressions
+
+Some regular expression engines allow you to do recursion. You can think of recursion as saying, if the match made it to this point, place an entirely new copy of the regular expression in my place.
+```bash
+$ \d\w(?R)
+$ \d\w\d\w(?R) # first iteration. Once the (?R) operator is reached, the entire regular expression is pasted there
+$ \d\w\d\w\d\w(?R) # second iteration. Gets placed again
+```
+
+Like with all recursion, you need to provide a **base case**. In the case of regular expressions, that can look like using either the `?` optional operator, or an `|` or operator:
+```bash
+$ \d\w(?R)? # repeat if you can, but if it doesn't match, its not required
+$ \d\w(?:$|(?R)) # match either the end of the line, or a repeat of the pattern
+```
+Both of these patterns give an out, to halt the recursion
+
+One example that can be useful is matching palindromes. An example regular expression that will match palindromes is the following:
+```bash
+$ (\w)(?:(?R)|\w?)\1
+```
+
+This is saying:
+* `(\w)`: match a word character and put it in a capture group
+* `(?: ... )`: enter a non-capture group
+* `(?R)|\w?`: recursively match the existing pattern, a single letter, or nothing
+* `\1`: match the word character that was matched in the beginning
+
+You could also use this to write a regular expression that ensures that all brackets are correctly paired. You can read a much better explanation [here](https://www.rexegg.com/regex-recursion.html).
+
 #### Others
-There are things like recursive searching and named capture groups that are available in many regex implementations. I personally don't use them, but I figured it was worth mentioning that they were available.
+There are things like named capture groups that are available in many regex implementations. I personally don't use them, but I figured it was worth mentioning that they were available.
 
 ### Flags
 

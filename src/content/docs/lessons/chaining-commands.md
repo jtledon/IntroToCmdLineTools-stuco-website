@@ -3,7 +3,7 @@ title: Chaining commands together
 sidebar:
     order: 8
     # hidden: true
-    badge: New
+    # badge: New
 ---
 
 ## Administration

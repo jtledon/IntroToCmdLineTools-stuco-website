@@ -1,0 +1,51 @@
+---
+title: Command-line network requests
+sidebar:
+    order: 9
+    # hidden: true
+    badge: New
+---
+import { Image } from 'astro:assets';
+import chrome-curl from '../../../assets/chrome-curl.png';
+
+# Network Requests
+
+## Web Interactions
+
+### `curl` (cURL)
+
+We've already used it a ton in this class; `curl` allows you to send general network requests via the command-line. By default, the downloaded content is written to stdout
+```bash
+$ curl -s https://intro-to-cmdline-tools.jtledon.com/parsetext/jledon.txt 2> /dev/null | grep ...
+```
+The above structure is a very common way to format a pipeline of commands. Request some amount of data from a url and then perform some operations on it - in this case, grep.
+
+Some of the most common flags that you will find useful:
+```bash
+$ curl [--header|-H] # send http headers in the curl request
+$ curl [--data.*] # send various forms of POST request data
+$ curl [--output|-o] # rather than writing to stdout, write to a file instead
+```
+
+#### Chrome requests
+<!-- ![test]('../../../assets/chrome-curl.png') -->
+
+<Image
+    src={ chrome-curl }
+    alt="Image of how you can download a network request from chrome as a curl bash command"
+    width="400"
+/>
+
+### `wget`
+`wget` tends to be used for strictly downloading content from websites, rather than
+
+wgeti - for downloading websites
+
+## Moving Data
+rsync
+scp
+
+## Other Useful Tools
+dig
+nslookup
+nc

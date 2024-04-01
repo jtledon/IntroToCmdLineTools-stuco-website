@@ -114,6 +114,7 @@ This will be similar to the exam. Provide a string of characters that you can pr
 3) change the `requestUri` variable to split `course` at 3, not at 2.
 
 ![vim homework](../../../assets/vim-additional-practice.png)
+_file [here](https://intro-to-cmdline-tools.jtledon.com/vim-macros/main.py)_
 
 All the letters should be in one string, with no spaces. If you need to type an Escape, use <esc> in your canvas submission, if you need to type Enter, use <cr>, which stands for carriage return.
 

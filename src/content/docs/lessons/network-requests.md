@@ -3,7 +3,7 @@ title: Command-line network requests
 sidebar:
     order: 9
     # hidden: true
-    badge: New
+    # badge: New
 ---
 import { Image } from 'astro:assets';
 import chrome-curl from '../../../assets/chrome-curl.png';

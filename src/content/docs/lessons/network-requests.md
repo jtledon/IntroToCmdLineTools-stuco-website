@@ -116,10 +116,14 @@ This will be similar to the exam. Provide a string of characters that you can pr
 ![vim homework](../../../assets/vim-additional-practice.png)
 _file [here](https://intro-to-cmdline-tools.jtledon.com/vim-macros/main.py)_
 
-All the letters should be in one string, with no spaces. If you need to type an Escape, use <esc> in your canvas submission, if you need to type Enter, use <cr>, which stands for carriage return.
+All the letters should be in one string, with no spaces. If you need to type an Escape, use `<esc>` in your canvas submission, if you need to type Enter, use `<cr>`, which stands for carriage return.
 
 An example might be: `I"<esc>4jA,`
 
 You can follow [this](https://youtu.be/Wur6icnhCAs) video to learn how to interact with registers and test your command.
 
 Submit this assignment on canvas in the appropriate assignment on canvas. Include both a video of you interacting with the registers, yanking a command string into a register, and running it to show your changes being executed to solve the homework. Please also include your command string as plaintext, with the swapped out <esc> and <cr> characters.
+
+:::tip[Grading]
+I will be copying the command string from your submission, swapping out any meta characters with their ascii codes, and running it as a macro; ensure it is a single command string that makes all listed changes.
+:::

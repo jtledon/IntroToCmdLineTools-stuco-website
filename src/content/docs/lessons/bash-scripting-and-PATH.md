@@ -29,3 +29,5 @@ cron jobs for automating commands to run at a specific time
 
 Environment variables
 $PATH
+
+TODO: mention posix compliance

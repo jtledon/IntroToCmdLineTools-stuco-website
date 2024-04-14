@@ -189,6 +189,24 @@ $ head -n 5 file.txt > >(grep "word")
 <!-- signals
 error / return codes -->
 
+<!-- TODO:
+<<< here-strings
+< redirects file input to stdin
+<<< redirects string input to stdin
+similar to doing `echo "hi" | cat` without needing to spawn a new subshell
+
+<< here-document
+(continue accepting multiline text until the keyword is reached)
+allows you to do
+wc -w << EOF
+> this
+> is
+> it
+> EOF
+outputs 3
+
+-->
+
 ## Homework
 
 Submit your own set of commands that use all of the following:

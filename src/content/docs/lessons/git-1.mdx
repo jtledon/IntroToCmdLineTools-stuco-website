@@ -82,6 +82,12 @@ And a real world interaction with a git repo:
 `git` will start deleting entries from the reflog that are older than 90 days. This can be tuned to your preference, though.
 :::
 
+Alternatively, you can add the flag `--reflog` to `git log` to get a combined output:
+```bash #frame='none'
+$ git log --reflog # to view the commit logs intertwined
+$ git log --graph --oneline --reflog # to get a more visual, graph-like view
+```
+
 ### dangling commits
 
 A dangling commit is just a commit that has no easy way of being referenced. If it exists in the log heirarchy of some branch, tag, or HEAD; you can `git log` and easily find the commit; these commits would not be considered dangling. An example of a dangling commit would be the commit that was deleted in the previous animation, which we could only refer to via the reflog.

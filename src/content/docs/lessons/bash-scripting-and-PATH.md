@@ -30,4 +30,8 @@ cron jobs for automating commands to run at a specific time
 Environment variables
 $PATH
 
+difference between source, . , ./
+    one runs as a binary in a subshell, the other runs in the current context
+    that's why running source ~/.bashrc updates your current terminal session
+
 TODO: mention posix compliance

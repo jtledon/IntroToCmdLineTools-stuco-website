@@ -6,22 +6,26 @@ sidebar:
     # badge: New
 ---
 
-homebrew
+apt
+yum
+rpm
+dnf
+packman
+
+flatpack
+snaps
+
 winget
 chocolatey
-pip
+homebrew
+
 npm
 yarn
 bun
+deno
+pnpm
 
-Flatpack
-Docker
-Npm
-Yarn
-Bun
-Brew
-Winget
-Apt
-Pacman
-Python venv
 pip
+Python venv
+
+Docker

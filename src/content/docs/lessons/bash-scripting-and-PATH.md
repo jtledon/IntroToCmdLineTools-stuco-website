@@ -253,6 +253,8 @@ There are some limitations:
 1) You can use `awk` but you may not use any `awk` logic or functions. You can only split and reorder using printing based on the field numbers (like `print $2`)
 2) You cannot use `ripgrep` or any other regex tool that allows you to find and replace (like `ripgrep`'s `-r` flag)
 
+To submit this homework, submit a `.sh` file named in the following format: `{andrewID}_script.sh` to the appropriate canvas assignment.
+
 <!-- ## Running previous commands -->
 <!-- `!!` And `!$` and `!^` and all variations for referencing the previous command -->
 

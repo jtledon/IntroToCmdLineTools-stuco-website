@@ -161,16 +161,97 @@ echo $RESULT
 ```
 
 Sometimes, we need to concatenate a variable with a string, but it may not be clear where the variable ends and the string begins. In that case, you can use `${VAR}` syntax, where you wrap the variable name in `{}` braces, in addition to using the `$`
+```bash
+#!/bin/bash
 
-### Testing
-TODO: Need to finish this section
-`()` vs `(())` vs `[[]]` vs `[]` vs `test` in `if` conditions
+RESULT=$(find . -type f README.md | head -n1)
+echo ${RESULT}_concat_string_on_end
+```
 
+### If's
+In scripts, you'll often find various different syntax around writing if statements. The goal here is to demystify the differences. A standard if statement will look like the following:
+```bash
+# the `if` statement is expecting an exit code to determine if it should go down a path or not.
+if cond
+then cmd_to_run_if_true
+else cmd_to_run_if_false
+fi
+```
+
+
+but you will likely see it like this:
+```bash
+if [ cond ]; then
+fi
+```
+
+There are some other ways in which you might see the `cond` being wrapped, such as:
+```bash
+if [ cond ];   then ...
+if [[ cond ]]; then ...
+if (cond)      then ...
+if ((cond))    then ...
+```
+
+Lets go over what each of these are:
+
+#### `[ ... ]`
+
+```bash
+if [ cond ];
+```
+The single square bracket syntax is an easy way to gain access to the `test` command (I recommend reading `man test` or `man [`). The `test` command allows you to perform various file system, number, and string checks and returns the success or failure to the `if` statement via exit codes; this syntax is also POSIX compliant (talked about in the next section)
+
+An example might look like:
+```bash
+if [ -f ${ARG} ]; then # if this argument is storing the path to a file...
+```
+
+#### `[[ ... ]]`
+The double bracket variation is very similar to the single bracket, except it adds on some additional features, making it more convenient to use, but also making it no longer POSIX compliant; this exists only in certain shells such as `bash` or `zsh`. I would personally always recommend using `[]` single brackets so that you can maintain POSIX compliance and stick to the standard syntax that everyone already knows.
+```bash
+if [[ -s $FILE && -r $FILE ]]; then ... # the file exists, has size greater than 0, and we can read it
+if [ -s $FILE ] && [ -r $FILE ]; then ... # instead of this
+```
+
+:::caution
+both `[ ... ]` and `[[ ... ]]` require whitespace between the brackets and any of the characters inside. Not including it is a syntax error
+:::
+
+#### `(...)`
+You can think about this link command substitution, but rather than returning the content of `stdout`, it returns the exit code. `(...)` spawns a subshell, executes the command[s], and provides `bash` with the resulting exit code.
+```bash
+if (exit 1); then # does not enter the check because the exit code was non-zero
+if (yes | head -n1 > /dev/null); then # enters the check because the pipeline has an exit code of 0
+```
+
+#### `((...))`
+The double parenthesis syntax gives you access to [arithmetic operations](https://www.gnu.org/software/bash/manual/bash.html#Arithmetic-Expansion), allowing you to perform math operations not otherwise available, such as modulo:
+```bash
+#!/bin/bash  # don't forget this, (()) is not a POSIX sh construct
+x=1
+if ((x % 2 == 0)); then # does not enter the check because x is odd
+    echo "parity"
+fi
+```
 
 ## POSIX
 POSIX is an acronym which stands for Portable Operating System Interface. The idea is that tools/programs/scripts which are POSIX compliant will run on any operating system that is also POSIX compliant. The idea is to offer portability during an age of various operating systems with different instructions.
 
 This is why scripts are still often written using `/bin/sh`. `bash` and other shells contain features that might not exist on other POSIX compliant systems (such as <() process redirection).
+
+:::note
+Some really great additional readings:\
+[bash](https://www.gnu.org/software/bash/manual/bash.html#Basic-Shell-Features): all of section 3\
+[sh](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html)
+:::
+
+## Homework
+The homework is straightforward this week. Re-solve homework Assignment 5 - Text Parsing Pipeline, but this time using a shell script rather than `awk`.
+
+There are some limitations:
+1) You can use `awk` but you may not use any `awk` logic or functions. You can only split and reorder using printing based on the field numbers (like `print $2`)
+2) You cannot use `ripgrep` or any other regex tool that allows you to find and replace (like `ripgrep`'s `-r` flag)
 
 <!-- ## Running previous commands -->
 <!-- `!!` And `!$` and `!^` and all variations for referencing the previous command -->

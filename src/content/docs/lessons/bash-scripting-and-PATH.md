@@ -3,7 +3,7 @@ title: The shell
 sidebar:
     order: 11
     # hidden: true
-    badge: New
+    # badge: New
 ---
 
 

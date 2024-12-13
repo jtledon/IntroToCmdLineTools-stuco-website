@@ -101,6 +101,17 @@ Some commands, are implemented a little differently; think about a command like 
 
 Shell builtins are commands which provide the shell an interface to job control facilities, the directory stack, the command history and the programmable completion facilities.
 
+### Using subshells
+
+There are some instances in which you want to run a quick command from another location, but don't want to leave your current directory. You can do that by running the command in a sub-shell.
+
+```bash
+> ( cd ../someGitDir && git status )
+> # continue with normal commands
+```
+
+This allows you to spawn a sub-shell, run the `cd` and `git status` command, print the results to `stdout`, all while never modifying your current shell
+
 
 ## Shell expansion
 

@@ -110,6 +110,14 @@ $ grep word < file.txt
 ```
 We were able to pass the contents of the file on `stdin` without needing to call `cat` to get it to write to its `stdout` first.
 
+:::note
+This could have just as easily been done with `grep` by just calling it on the file:
+```bash
+$ grep work file.txt
+```
+But I wanted to showcase still using `stdin` as the input method
+:::
+
 I find this particularly useful when using `gdb` on binaries that require `stdin` input; it allows you to define the data that you want the binary to read on `stdin`, in a file. Then, when the binary is ready to read from `stdin` there is already data there ready for it.
 ```bash
 $ gdb ./prog
@@ -120,6 +128,50 @@ $ gdb -ex='run < input_file' --args ./prog # one-liner of the same idea
 This method pairs particularly well with a `.gdbinit` file.
 
 <!-- what is `<<<` -->
+
+### Here-doc and Here-strings
+https://en.wikipedia.org/wiki/Here_document#Overview
+
+> The key difference from here documents is that, in here documents, the delimiters are on separate lines; the leading and trailing newlines are stripped. Unlike here documents, here strings do not use delimiters.
+
+wc -l << EOF
+these
+are all
+seperate
+lines
+EOF
+# 4
+
+#### Here-documents
+Work well with chaining
+```bash
+$ wc -l << EOF | xargs seq | xargs mkdir
+> this
+> is
+> a
+> multiline
+> string
+> EOF
+
+# makes directories 1 2 3 4 5
+```
+
+#### Here-strings
+Similar to here-docs, but there is no "delimiter", just a quotation, which is on the same line.
+Still works perfectly fine with chaining, but is more confusing to read (unmatched quote leading into the rest of the pipeline)
+Better for small inputs `bc <<< '2^7'` Note that bc only reads from stdin, and does not take cmdline args
+        otherwise you would have to write `echo 2^7 | bc`
+        or just open `bc` directly
+
+```bash
+$ wc -l <<< "this | xargs seq | xargs mkdir
+> is
+> a
+> multiline
+> string"
+
+# makes directories 1 2 3 4 5
+```
 
 ### `xargs`
 
@@ -219,7 +271,6 @@ Submit your own set of commands that use all of the following:
 * process substitution output - `>()` writing to a commands stdin rather than a file
 
 You can have these commands do whatever you want. When you submit the command, include a summary of what this command or pipeline of commands does and what problem it solves.
-
 
 When using `<()`, you cant do something like `diff <(cat file.txt)` instead of just doing `diff file.txt` because no meaningful change was made; however, if you use something more substantial than `cat`, that would be fine.
 

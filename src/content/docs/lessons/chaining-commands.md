@@ -134,13 +134,14 @@ https://en.wikipedia.org/wiki/Here_document#Overview
 
 > The key difference from here documents is that, in here documents, the delimiters are on separate lines; the leading and trailing newlines are stripped. Unlike here documents, here strings do not use delimiters.
 
-wc -l << EOF
-these
-are all
-seperate
-lines
-EOF
-# 4
+```bash
+wc -l <<EOF
+> these
+> are all
+> seperate
+> lines
+> EOF
+```
 
 #### Here-documents
 Work well with chaining
@@ -189,6 +190,11 @@ Some notable commands that
 ```bash
 $ find ... | rm # doesnt work
 $ find ... | xargs rm # passing it as a cmdline argument rather than via stdin
+```
+
+For complex `xargs` commands that require subshells, piping or other operations that execute with higher precedence, consider using `bash -c` to wrap the command and ensure `xargs -I{}` string substitution occurs _before_ running any command
+```bash
+$ seq 2 5 | xargs -I{} bash -c 'printf "%s - %s\n" {} $(dig +short site{}.com | head -n 1)'
 ```
 
 ### Command substitution

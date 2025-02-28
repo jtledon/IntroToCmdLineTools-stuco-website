@@ -35,10 +35,24 @@ $ cat file.txt | grep word
 ```
 Nothing changes in the perspective of the `cat` command; all it knows is that it is writing data to its `stdout`. This redirection is occurring at the shell level: the OS provides the mechanisms to make the redirection possible, but the shell is what connects one commands `stdout` to the next commands `stdin`, which is all opaque to the commands themselves.
 
+### Data Streams: `stdin`, `stdout`, and `stderr`
+There are 3 primary data streams for any terminal command: `stdin`, `stdout`, and `stderr`.
+1. `stdin` is how some commands receive their input data. If a command is able to receive its information via a pipe (`|`), then it reads from `stdin`
+2. `stdout` is the channel in which most commands output their information. It is usually connected to your current terminal window, which is why are you able to see it when running a command.
+3. `stderr` is like `stdout` in the fact that it is an output channel of information, but it is usually only written to when an error occurs with the command that was run. It also tends to write to the terminal.
+
+Each of these data streams have a corresponding file in the `/dev/` directory:
+1. `/dev/stdin`
+2. `/dev/stdout`
+3. `/dev/stderr`
+which can be used to manually manipulate the data stream
+
+In the `/dev/` directory there are also file descriptors for each of the `tty`s in use for the different terminal sessions you have open, as well as other useful files such as `/dev/null` which you can think of as a black hole, which takes information on `stdin` and disregards it.
+
 ### redirection
 
 :::note
-Each command has 3 file descriptors: `stdin`, `stdout`, and `stderr`. They each have numbers, corresponding with 0, 1, and 2 respectively.
+As mentioned, each command has 3 file descriptors - `stdin`, `stdout`, and `stderr` - and they each have numbers, corresponding with 0, 1, and 2 respectively.
 :::
 
 #### basic redirection (`>` and `>>`)
@@ -243,6 +257,19 @@ This is a bit of contrived example, but it shows what it can do and how to use i
 $ head -n 5 file.txt > >(grep "word")
 ```
 `>` expects a file to write to. Rather than passing in a filename, we pass in `>()`: `>()` stands in the place of where a file would be. Rather than the command writing to that fd, the output that would have been written is piped into the command inside the process substituion, and it gets ran.
+
+#### Utilizing device files
+There are times when some commands _only_ write to a file, and wont write to stdout: `cp` is a poor example, but it fits the purposes of this demonstration. One way to get around this is to use output process substitution:
+```bash
+$ cp some-file.txt >(cat)
+```
+
+but _another_ way would be to use the `/dev/stdout` file
+```bash
+$ cp some-file.txt /dev/stdout # this also goes to stdout!
+```
+
+Its worth noting that this is an _incredibly_ contrived example, and just `cat`ing the file would make much more sense and have the same effect, but its gets my point across of how you might interact with the input and output stream device files.
 
 <!-- signals
 error / return codes -->
